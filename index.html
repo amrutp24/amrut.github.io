@@ -5,6 +5,26 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>DevOps Engineer | Amrut Pagidipally</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .typewriter {
+      overflow: hidden;
+      border-right: .15em solid #00ff7f;
+      white-space: nowrap;
+      animation:
+        typing 3s steps(40, end),
+        blink-caret .75s step-end infinite;
+    }
+
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: #00ff7f; }
+    }
+  </style>
 </head>
 <body class="bg-gray-900 text-white font-mono">
   <div class="min-h-screen px-6 py-10 max-w-5xl mx-auto">
@@ -15,8 +35,8 @@
 
     <section class="mb-12">
         <div class="bg-gray-800 p-6 rounded-lg shadow-md">
-          <pre class="text-green-300 text-left">$ terraform apply</pre>
-          <pre class="text-blue-300 text-left">$ kubectl get pods -A</pre>
+          <pre class="text-green-300 text-left typewriter">$ terraform apply</pre>
+          <pre class="text-blue-300 text-left typewriter" style="animation-delay: 3s; animation-fill-mode: backwards;">$ kubectl get pods -A</pre>
         </div>
       </section>
 
