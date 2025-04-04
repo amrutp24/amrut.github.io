@@ -1,50 +1,92 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="transition-colors duration-300">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>DevOps Engineer | Amrut Pagidipally</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    .typewriter-wrapper {
+      display: inline-block;
+      white-space: pre;
+      overflow: hidden;
+      border-right: .15em solid #00ff7f;
+      animation:
+        typing 4s steps(40, end),
+        blink-caret .75s step-end infinite;
+    }
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: #00ff7f; }
+    }
+  </style>
 </head>
-<body class="bg-gray-900 text-white font-mono">
-  <div class="min-h-screen px-6 py-10 max-w-5xl mx-auto">
-    <header class="text-center mb-12">
-      <h1 class="text-5xl font-bold text-green-400">Hi, I'm Amrut Pagidipally</h1>
-      <p class="text-xl mt-4 text-gray-300">DevOps Engineer | Automation | CI/CD | Cloud | IaC | Monitoring</p>
+<body class="bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-100">
+  <div class="min-h-screen px-6 py-10 max-w-6xl mx-auto">
+    <div class="flex justify-end mb-4">
+      <button onclick="document.documentElement.classList.toggle('dark')" class="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-100 px-4 py-2 rounded shadow">
+        Toggle Dark Mode
+      </button>
+    </div>
+
+    <header class="text-center mb-16">
+      <h1 class="text-5xl font-bold text-gray-900 dark:text-white">Hi, I'm Amrut Pagidipally</h1>
+      <p class="text-lg mt-4 text-gray-600 dark:text-gray-300">DevOps Engineer | Automation | CI/CD | Cloud | IaC | Monitoring</p>
     </header>
 
-    <section id="about" class="mb-12">
-      <h2 class="text-3xl font-semibold text-green-300 mb-2">About Me</h2>
-      <p class="text-gray-300 leading-relaxed">I'm a DevOps engineer passionate about building scalable infrastructure, automating deployments, and reducing cloud costs. I love working with Kubernetes, Terraform, and observability tools to streamline software delivery and improve reliability.</p>
+    <section id="about" class="mb-16">
+      <h2 class="text-3xl font-semibold mb-4 border-b pb-2">About Me</h2>
+      <p class="leading-relaxed text-lg">I'm a DevOps engineer passionate about building scalable infrastructure, automating deployments, and reducing cloud costs. I love working with Kubernetes, Terraform, and observability tools to streamline software delivery and improve reliability.</p>
     </section>
 
-    <section id="skills" class="mb-12">
-      <h2 class="text-3xl font-semibold text-green-300 mb-2">Tools & Skills</h2>
-      <ul class="list-disc list-inside text-gray-300">
-        <li>AWS, GCP, Azure</li>
-        <li>Terraform</li>
-        <li>Docker, Kubernetes</li>
-        <li>GitHub Actions, Jenkins, ArgoCD</li>
-        <li>Dynatrace</li>
+    <section id="skills" class="mb-16">
+      <h2 class="text-3xl font-semibold mb-4 border-b pb-2">Tools & Skills</h2>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4 text-lg">
+        <div>AWS, GCP, Azure</div>
+        <div>Terraform, Scalar</div>
+        <div>Docker, Kubernetes</div>
+        <div>GitHub Actions, Jenkins, ArgoCD</div>
+        <div>Prometheus, Grafana, ELK</div>
+      </div>
+    </section>
+
+    <section id="certifications" class="mb-16">
+      <h2 class="text-3xl font-semibold mb-4 border-b pb-2">Certifications</h2>
+      <ul class="list-disc list-inside text-lg">
+        <li>AWS Certified Solutions Architect – Associate</li>
+        <li>Certified Kubernetes Administrator (CKA)</li>
+        <li>HashiCorp Certified: Terraform Associate</li>
       </ul>
     </section>
 
-    <section id="projects" class="mb-12">
-      <h2 class="text-3xl font-semibold text-green-300 mb-2">Projects</h2>
-      <ul class="space-y-3 text-gray-300">
-        <li>
-          <strong>AWS Cost Optimizer with AI</strong><br>
-          Identifies and stops idle resources automatically.
-        </li>
-        <li>
-          <strong>Kubernetes GitOps Pipeline</strong><br>
-          Full setup with ArgoCD, Helm, and Kustomize.
-        </li>
-        <li>
-          <strong>Terraform Module Registry</strong><br>
-          A collection of reusable IaC modules.
-        </li>
-      </ul>
+    <section id="projects" class="mb-16">
+      <h2 class="text-3xl font-semibold mb-4 border-b pb-2">Projects</h2>
+      <div class="grid md:grid-cols-2 gap-6">
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+          <h3 class="text-xl font-semibold mb-2">AWS Cost Optimizer with AI</h3>
+          <p>Identifies and stops idle resources automatically.</p>
+        </div>
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+          <h3 class="text-xl font-semibold mb-2">Kubernetes GitOps Pipeline</h3>
+          <p>Full setup with ArgoCD, Helm, and Kustomize.</p>
+        </div>
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+          <h3 class="text-xl font-semibold mb-2">Terraform Module Registry</h3>
+          <p>A collection of reusable IaC modules.</p>
+        </div>
+        <div class="bg-gray-900 text-green-300 font-mono p-6 rounded-lg shadow">
+          <pre class="text-left"><span class="typewriter-wrapper">$ terraform apply
+$ kubectl get pods -A</span></pre>
+        </div>
+      </div>
     </section>
 
     <section id="contact" class="mb-12">
