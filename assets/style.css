@@ -26,4 +26,11 @@ body {
   a {
     color: #0077cc;
   }
-  
+
+  [data-lucide] {
+    display: inline-block;
+    width: 24px; /* Adjust size as needed */
+    height: 24px;
+    stroke-width: 2; /* Adjust stroke width as needed */
+    color: currentColor; /* Inherit text color */
+  }
