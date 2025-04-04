@@ -6,7 +6,6 @@
   <title>DevOps Engineer | Amrut Pagidipally</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    // Save dark mode preference in localStorage
     if (localStorage.getItem('theme') === 'dark' ||
         (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
       document.documentElement.classList.add('dark');
@@ -15,6 +14,7 @@
     }
   </script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
   <style>
     body {
       font-family: 'Inter', sans-serif;
@@ -40,35 +40,44 @@
 </head>
 <body class="bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-100">
   <div class="min-h-screen px-6 py-10 max-w-6xl mx-auto">
-    <div class="flex justify-end mb-4">
-      <button onclick="document.documentElement.classList.toggle('dark')" class="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-100 px-4 py-2 rounded shadow">
+    <div class="flex justify-between items-center mb-8">
+      <h1 class="text-2xl font-bold">DevOps Portfolio</h1>
+      <button onclick="toggleDarkMode()" class="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-100 px-4 py-2 rounded shadow">
         Toggle Dark Mode
       </button>
     </div>
 
-    <header class="text-center mb-16">
-      <h1 class="text-5xl font-bold text-gray-900 dark:text-white">Hi, I'm Amrut Pagidipally</h1>
-      <p class="text-lg mt-4 text-gray-600 dark:text-gray-300">DevOps Engineer | Automation | CI/CD | Cloud | IaC | Monitoring</p>
+    <header class="mb-20 flex flex-col md:flex-row items-center justify-between gap-10">
+      <div class="flex-1">
+        <h1 class="text-5xl font-bold text-gray-900 dark:text-white leading-tight">Hi, I'm Amrut Pagidipally</h1>
+        <p class="text-lg mt-4 text-gray-600 dark:text-gray-300">Shipping scalable infrastructure. Automating everything. Sleeping peacefully.</p>
+      </div>
+      <div class="flex-1 text-center">
+        <img src="https://undraw.io/illustration/devops_re_b0wq.svg" alt="DevOps Illustration" class="w-64 mx-auto">
+      </div>
     </header>
 
-    <section id="about" class="mb-16">
-      <h2 class="text-3xl font-semibold mb-4 border-b pb-2">About Me</h2>
-      <p class="leading-relaxed text-lg">I'm a DevOps engineer passionate about building scalable infrastructure, automating deployments, and reducing cloud costs. I love working with Kubernetes, Terraform, and observability tools to streamline software delivery and improve reliability.</p>
+    <section id="about" class="mb-20">
+      <h2 class="text-sm text-gray-500 uppercase tracking-widest mb-2">About</h2>
+      <h3 class="text-3xl font-bold mb-6">Who I Am</h3>
+      <p class="leading-relaxed text-lg">I'm a DevOps engineer passionate about building scalable infrastructure, automating deployments, and reducing cloud costs. I specialize in Kubernetes, Terraform, CI/CD pipelines, and monitoring systems that help teams deliver faster with confidence.</p>
     </section>
 
-    <section id="skills" class="mb-16">
-      <h2 class="text-3xl font-semibold mb-4 border-b pb-2">Tools & Skills</h2>
+    <section id="skills" class="mb-20">
+      <h2 class="text-sm text-gray-500 uppercase tracking-widest mb-2">Skills</h2>
+      <h3 class="text-3xl font-bold mb-6">Tools & Technologies</h3>
       <div class="grid grid-cols-2 md:grid-cols-3 gap-4 text-lg">
         <div>AWS, GCP, Azure</div>
-        <div>Terraform, Scalar</div>
+        <div>Terraform, Pulumi</div>
         <div>Docker, Kubernetes</div>
         <div>GitHub Actions, Jenkins, ArgoCD</div>
         <div>Prometheus, Grafana, ELK</div>
       </div>
     </section>
 
-    <section id="certifications" class="mb-16">
-      <h2 class="text-3xl font-semibold mb-4 border-b pb-2">Certifications</h2>
+    <section id="certifications" class="mb-20">
+      <h2 class="text-sm text-gray-500 uppercase tracking-widest mb-2">Certifications</h2>
+      <h3 class="text-3xl font-bold mb-6">Credentials</h3>
       <ul class="list-disc list-inside text-lg">
         <li>AWS Certified Solutions Architect – Associate</li>
         <li>Certified Kubernetes Administrator (CKA)</li>
@@ -76,20 +85,24 @@
       </ul>
     </section>
 
-    <section id="projects" class="mb-16">
-      <h2 class="text-3xl font-semibold mb-4 border-b pb-2">Projects</h2>
+    <section id="projects" class="mb-20">
+      <h2 class="text-sm text-gray-500 uppercase tracking-widest mb-2">Projects</h2>
+      <h3 class="text-3xl font-bold mb-6">What I've Built</h3>
       <div class="grid md:grid-cols-2 gap-6">
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow hover:scale-105 transition">
           <h3 class="text-xl font-semibold mb-2">AWS Cost Optimizer with AI</h3>
           <p>Identifies and stops idle resources automatically.</p>
+          <a href="#" class="text-blue-600 dark:text-blue-400 hover:underline text-sm">View on GitHub →</a>
         </div>
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow hover:scale-105 transition">
           <h3 class="text-xl font-semibold mb-2">Kubernetes GitOps Pipeline</h3>
           <p>Full setup with ArgoCD, Helm, and Kustomize.</p>
+          <a href="#" class="text-blue-600 dark:text-blue-400 hover:underline text-sm">View on GitHub →</a>
         </div>
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow">
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow hover:scale-105 transition">
           <h3 class="text-xl font-semibold mb-2">Terraform Module Registry</h3>
           <p>A collection of reusable IaC modules.</p>
+          <a href="#" class="text-blue-600 dark:text-blue-400 hover:underline text-sm">View on GitHub →</a>
         </div>
         <div class="bg-gray-900 text-green-300 font-mono p-6 rounded-lg shadow">
           <pre class="text-left"><span class="typewriter-wrapper">$ terraform apply
@@ -98,18 +111,20 @@ $ kubectl get pods -A</span></pre>
       </div>
     </section>
 
-    <section id="contact" class="mb-12">
+    <section id="contact" class="mb-20">
       <h2 class="text-3xl font-semibold text-green-300 mb-2">Contact</h2>
       <p class="text-gray-300">Email: <a href="mailto:amrut.pagidipally@gmail.com" class="text-green-400 hover:underline">amrut.pagidipally@gmail.com</a></p>
       <p class="text-gray-300">GitHub: <a href="https://github.com/amrutp24" class="text-green-400 hover:underline">@amrutp24</a></p>
       <p class="text-gray-300">LinkedIn: <a href="https://www.linkedin.com/in/amrut-pagidipally-bb4244180/" class="text-green-400 hover:underline">/amrut-pagidipally</a></p>
     </section>
 
-    <footer class="text-center text-gray-500 mt-10">
+    <footer class="text-center text-gray-500 dark:text-gray-400 mt-20">
       <p>© 2025 Amrut Pagidipally | DevOps Portfolio</p>
     </footer>
   </div>
+
   <script>
+    lucide.createIcons();
     function toggleDarkMode() {
       const html = document.documentElement;
       html.classList.toggle('dark');
