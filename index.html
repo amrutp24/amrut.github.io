@@ -1,153 +1,1204 @@
 <!DOCTYPE html>
-<html lang="en" class="transition-colors duration-300">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>DevOps Engineer | Amrut Pagidipally</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amrut | DevOps // SYSTEM_READY</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      darkMode: 'class',
-      theme: {
-        extend: {},
-      },
-      variants: {},
-      plugins: [],
-    }
-  </script>
-  <script>
-    if (localStorage.getItem('theme') === 'dark' ||
-        (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  </script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Orbitron:wght@400;500;600;700;800;900&family=Michroma&family=Share+Tech+Mono&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --neon-pink: #ff2a6d;
+      --neon-cyan: #05d9e8;
+      --neon-yellow: #f9f002;
+      --neon-purple: #d300c5;
+      --neon-green: #00ff41;
+      --neon-orange: #ff9500;
+      --neon-amber: #ffb300;
+      --bg-dark: #0a0a0f;
+      --bg-panel: #0a1628;
+    }
+    
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Michroma', sans-serif;
+      background: 
+        /* Stars layer */
+        radial-gradient(1px 1px at 20% 30%, rgba(255,255,255,0.8), transparent),
+        radial-gradient(1px 1px at 40% 70%, rgba(255,255,255,0.5), transparent),
+        radial-gradient(1px 1px at 60% 20%, rgba(255,255,255,0.6), transparent),
+        radial-gradient(1px 1px at 80% 50%, rgba(255,255,255,0.4), transparent),
+        radial-gradient(1px 1px at 10% 80%, rgba(255,255,255,0.5), transparent),
+        radial-gradient(1px 1px at 90% 10%, rgba(255,255,255,0.6), transparent),
+        /* Gradient layers - cyberpunk sky */
+        linear-gradient(to bottom, 
+          #0a0a0f 0%, 
+          #0d0d1a 30%,
+          #1a0d1a 50%,
+          #0d1a1a 70%,
+          #0a0a0f 100%
+        );
+      background-attachment: fixed;
+      color: #e0e0e0;
+      overflow-x: hidden;
     }
-    .typewriter-wrapper {
-      display: inline-block;
-      white-space: pre;
+    
+    .mono { font-family: 'JetBrains Mono', monospace; }
+    .tech { font-family: 'Share Tech Mono', monospace; }
+
+    /* CRT screen effect */
+    .crt::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: 
+        radial-gradient(ellipse at center, transparent 0%, rgba(0,0,0,0.4) 100%),
+        repeating-linear-gradient(0deg, transparent 0px, transparent 2px, rgba(0,0,0,0.15) 2px, rgba(0,0,0,0.15) 4px);
+      pointer-events: none;
+      z-index: 9998;
+      animation: flicker 0.15s infinite;
+    }
+    
+    @keyframes flicker {
+      0% { opacity: 0.95; }
+      50% { opacity: 1; }
+      100% { opacity: 0.97; }
+    }
+    
+    .crt::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at 50% 50%, transparent 50%, rgba(0,0,0,0.3) 100%);
+      pointer-events: none;
+      z-index: 9997;
+    }
+
+    /* Animated grid floor */
+    .cyber-grid {
+      position: fixed;
+      inset: 0;
+      background: 
+        linear-gradient(90deg, rgba(5, 217, 232, 0.03) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(5, 217, 232, 0.03) 1px, transparent 1px);
+      background-size: 50px 50px;
+      transform: perspective(500px) rotateX(60deg);
+      transform-origin: center top;
+      animation: gridScroll 20s linear infinite;
+      z-index: -2;
+    }
+    
+    @keyframes gridScroll {
+      0% { background-position: 0 0; }
+      100% { background-position: 0 50px; }
+    }
+
+    /* Intense glitch */
+    .glitch {
+      position: relative;
+    }
+    
+    .glitch::before,
+    .glitch::after {
+      content: attr(data-text);
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    
+    .glitch::before {
+      left: 3px;
+      text-shadow: -3px 0 var(--neon-pink), 3px 0 var(--neon-cyan);
+      clip: rect(24px, 550px, 90px, 0);
+      animation: glitch-anim-1 2s infinite linear alternate-reverse;
+    }
+    
+    .glitch::after {
+      left: -3px;
+      text-shadow: -3px 0 var(--neon-cyan), 3px 0 var(--neon-pink);
+      clip: rect(85px, 550px, 140px, 0);
+      animation: glitch-anim-2 3s infinite linear alternate-reverse;
+    }
+    
+    @keyframes glitch-anim-1 {
+      0% { clip: rect(20px, 9999px, 80px, 0); }
+      20% { clip: rect(60px, 9999px, 10px, 0); }
+      40% { clip: rect(10px, 9999px, 90px, 0); }
+      60% { clip: rect(70px, 9999px, 30px, 0); }
+      80% { clip: rect(30px, 9999px, 50px, 0); }
+      100% { clip: rect(50px, 9999px, 20px, 0); }
+    }
+    
+    @keyframes glitch-anim-2 {
+      0% { clip: rect(50px, 9999px, 20px, 0); }
+      20% { clip: rect(10px, 9999px, 70px, 0); }
+      40% { clip: rect(80px, 9999px, 30px, 0); }
+      60% { clip: rect(20px, 9999px, 90px, 0); }
+      80% { clip: rect(60px, 9999px, 10px, 0); }
+      100% { clip: rect(40px, 9999px, 60px, 0); }
+    }
+
+    /* RGB split text */
+    .rgb-split {
+      text-shadow: 
+        3px 0 var(--neon-pink),
+        -3px 0 var(--neon-cyan);
+      animation: rgbShift 0.5s infinite alternate;
+    }
+    
+    @keyframes rgbShift {
+      0% { text-shadow: 3px 0 var(--neon-pink), -3px 0 var(--neon-cyan); }
+      100% { text-shadow: -3px 0 var(--neon-pink), 3px 0 var(--neon-cyan); }
+    }
+
+    /* Intense neon glow */
+    .neon-pink { 
+      color: var(--neon-pink);
+      text-shadow: 0 0 5px var(--neon-pink), 0 0 10px var(--neon-pink), 0 0 20px var(--neon-pink), 0 0 40px var(--neon-pink);
+    }
+    
+    .neon-cyan { 
+      color: var(--neon-cyan);
+      text-shadow: 0 0 5px var(--neon-cyan), 0 0 10px var(--neon-cyan), 0 0 20px var(--neon-cyan), 0 0 40px var(--neon-cyan);
+    }
+    
+    .neon-yellow {
+      color: var(--neon-yellow);
+      text-shadow: 0 0 5px var(--neon-yellow), 0 0 10px var(--neon-yellow), 0 0 20px var(--neon-yellow);
+    }
+    
+    .neon-green {
+      color: var(--neon-green);
+      text-shadow: 0 0 5px var(--neon-green), 0 0 10px var(--neon-green), 0 0 20px var(--neon-green);
+    }
+
+    /* Cyber cards */
+    .cyber-panel {
+      background: linear-gradient(135deg, rgba(10, 22, 40, 0.9), rgba(1, 10, 15, 0.95));
+      border: 1px solid rgba(5, 217, 232, 0.3);
+      position: relative;
       overflow: hidden;
-      border-right: .15em solid #00ff7f;
-      animation:
-        typing 4s steps(40, end),
-        blink-caret .75s step-end infinite;
     }
-    @keyframes typing {
-      from { width: 0 }
-      to { width: 100% }
+    
+    .cyber-panel::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(5, 217, 232, 0.1), transparent);
+      transition: left 0.5s;
     }
-    @keyframes blink-caret {
-      from, to { border-color: transparent }
-      50% { border-color: #00ff7f; }
+    
+    .cyber-panel:hover::before {
+      left: 100%;
+    }
+    
+    .cyber-panel:hover {
+      border-color: var(--neon-cyan);
+      box-shadow: 
+        0 0 20px rgba(5, 217, 232, 0.3),
+        0 0 40px rgba(5, 217, 232, 0.1),
+        inset 0 0 20px rgba(5, 217, 232, 0.05);
+    }
+
+    /* Corner brackets */
+    .corner-brackets::before,
+    .corner-brackets::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--neon-cyan);
+    }
+    
+    .corner-brackets::before {
+      top: -1px;
+      left: -1px;
+      border-right: none;
+      border-bottom: none;
+    }
+    
+    .corner-brackets::after {
+      bottom: -1px;
+      right: -1px;
+      border-left: none;
+      border-top: none;
+    }
+
+    /* Scanline moving bar */
+    .scan-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
+      opacity: 0.5;
+      animation: scanBar 8s linear infinite;
+      z-index: 9999;
+      pointer-events: none;
+    }
+    
+    @keyframes scanBar {
+      0% { top: -4px; }
+      100% { top: 100%; }
+    }
+
+    /* Terminal */
+    .terminal-window {
+      background: rgba(0, 0, 0, 0.9);
+      border: 1px solid rgba(5, 217, 232, 0.5);
+      box-shadow: 
+        0 0 10px rgba(5, 217, 232, 0.2),
+        inset 0 0 50px rgba(0, 0, 0, 0.8);
+    }
+    
+    .terminal-window .header {
+      background: linear-gradient(180deg, #1a1a2e, #0f0f1a);
+      border-bottom: 1px solid rgba(5, 217, 232, 0.3);
+    }
+
+    /* Blinking cursor */
+    .blink::after {
+      content: '█';
+      animation: blink 0.8s step-end infinite;
+      color: var(--neon-green);
+    }
+    
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    /* Holographic card effect */
+    .holo-card {
+      background: linear-gradient(135deg, 
+        rgba(255, 42, 109, 0.1), 
+        rgba(5, 217, 232, 0.1), 
+        rgba(211, 0, 197, 0.1));
+      border: 1px solid rgba(5, 217, 232, 0.2);
+      transition: all 0.3s;
+    }
+    
+    .holo-card:hover {
+      transform: translateY(-5px) scale(1.02);
+      border-color: var(--neon-cyan);
+      box-shadow: 
+        0 0 30px rgba(5, 217, 232, 0.3),
+        0 0 60px rgba(255, 42, 109, 0.1);
+    }
+
+    /* Nav */
+    .nav-item {
+      position: relative;
+    }
+    
+    .nav-item::before {
+      content: '[';
+      position: absolute;
+      left: -12px;
+      opacity: 0;
+      color: var(--neon-cyan);
+      transition: opacity 0.3s;
+    }
+    
+    .nav-item::after {
+      content: ']';
+      position: absolute;
+      right: -12px;
+      opacity: 0;
+      color: var(--neon-cyan);
+      transition: opacity 0.3s;
+    }
+    
+    .nav-item:hover::before,
+    .nav-item:hover::after {
+      opacity: 1;
+    }
+
+    /* Skill tags */
+    .cyber-tag {
+      background: rgba(5, 217, 232, 0.1);
+      border: 1px solid rgba(5, 217, 232, 0.3);
+      transition: all 0.2s;
+    }
+    
+    .cyber-tag:hover {
+      background: rgba(5, 217, 232, 0.2);
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 15px rgba(5, 217, 232, 0.4);
+      transform: translateY(-2px);
+    }
+
+    /* Danger stripe */
+    .danger-stripe {
+      background: repeating-linear-gradient(
+        45deg,
+        transparent,
+        transparent 10px,
+        rgba(255, 42, 109, 0.1) 10px,
+        rgba(255, 42, 109, 0.1) 20px
+      );
+    }
+
+    /* Reveal */
+    .reveal-up {
+      opacity: 0;
+      transform: translateY(60px);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    
+    .reveal-up.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Random flicker */
+    .flicker {
+      animation: randomFlicker 3s infinite;
+    }
+    
+    @keyframes randomFlicker {
+      0%, 100% { opacity: 1; }
+      92% { opacity: 1; }
+      93% { opacity: 0.4; }
+      94% { opacity: 1; }
+      96% { opacity: 0.7; }
+      97% { opacity: 1; }
+    }
+
+    /* System status indicator */
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--neon-green);
+      box-shadow: 0 0 10px var(--neon-green);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    
+    /* 2049 Amber glow */
+    .amber-glow {
+      color: var(--neon-orange);
+      text-shadow: 0 0 5px var(--neon-orange), 0 0 10px var(--neon-orange), 0 0 20px var(--neon-amber), 0 0 40px var(--neon-orange);
+    }
+    
+    .amber-border {
+      border-color: var(--neon-orange);
+      box-shadow: 0 0 20px rgba(255, 149, 0, 0.3), 0 0 40px rgba(255, 149, 0, 0.1);
+    }
+    
+    /* Fog effect */
+    .fog-container {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    
+    .fog-img {
+      position: absolute;
+      height: 100vh;
+      width: 300vw;
+      background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iNDAwIj48ZmlsdGVyIGlkPSJmIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iMC42NSIgbnVtT2N0YXZlcz0iMyIgc3RpdGNoVGlsZXM9InN0aXRjaCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNmKSIgb3BhY2l0eT0iMC4xMiIvPjwvc3ZnPg==');
+      background-size: cover;
+      opacity: 0.6;
+      animation: fogMove 60s linear infinite;
+    }
+    
+    @keyframes fogMove {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-66.66%); }
+    }
+    
+    /* 2049 style large text */
+    .massive-text {
+      font-size: clamp(4rem, 15vw, 12rem);
+      font-weight: 900;
+      line-height: 0.85;
+      letter-spacing: -0.02em;
+    }
+    
+    /* Orange gradient overlay */
+    .orange-haze {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 50vh;
+      background: linear-gradient(to top, rgba(255, 100, 0, 0.1) 0%, rgba(255, 149, 0, 0.05) 40%, transparent 100%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    
+    /* 2049 Cityscape - artistic/painted style */
+    .cityscape {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 55vh;
+      z-index: -1;
+      overflow: hidden;
+    }
+    
+    .building-art {
+      position: absolute;
+      bottom: 0;
+      background: linear-gradient(to top, #080810 0%, #0d0d18 50%, #12121f 100%);
+      border-radius: 2px 2px 0 0;
+    }
+    
+    /* Glow effects behind buildings */
+    .building-art::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120%;
+      height: 80%;
+      background: radial-gradient(ellipse at bottom center, rgba(255, 100, 150, 0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    
+    /* Window glow strips */
+    .building-art .glow-strip {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, 
+        transparent 0%,
+        rgba(255, 150, 50, 0.8) 20%,
+        rgba(255, 200, 100, 1) 40%,
+        rgba(255, 150, 50, 0.8) 60%,
+        transparent 100%
+      );
+      box-shadow: 0 0 10px rgba(255, 150, 50, 0.5), 0 0 20px rgba(255, 100, 50, 0.3);
+      animation: stripPulse 3s ease-in-out infinite;
+    }
+    
+    .building-art .glow-strip.cyan {
+      background: linear-gradient(90deg, 
+        transparent 0%,
+        rgba(0, 200, 255, 0.8) 20%,
+        rgba(100, 255, 255, 1) 40%,
+        rgba(0, 200, 255, 0.8) 60%,
+        transparent 100%
+      );
+      box-shadow: 0 0 10px rgba(0, 200, 255, 0.5), 0 0 20px rgba(0, 200, 255, 0.3);
+    }
+    
+    .building-art .glow-strip.pink {
+      background: linear-gradient(90deg, 
+        transparent 0%,
+        rgba(255, 50, 150, 0.8) 20%,
+        rgba(255, 100, 200, 1) 40%,
+        rgba(255, 50, 150, 0.8) 60%,
+        transparent 100%
+      );
+      box-shadow: 0 0 10px rgba(255, 50, 150, 0.5), 0 0 20px rgba(255, 50, 150, 0.3);
+    }
+    
+    @keyframes stripPulse {
+      0%, 100% { opacity: 0.8; }
+      50% { opacity: 1; }
+    }
+    
+    /* Vertical light beams from buildings */
+    .building-art .vertical-beam {
+      position: absolute;
+      bottom: 100%;
+      width: 40px;
+      height: 200px;
+      background: linear-gradient(to top, rgba(255, 150, 50, 0.3), transparent);
+      filter: blur(8px);
+      transform: translateX(-50%);
+    }
+    
+    .building-art .vertical-beam.cyan {
+      background: linear-gradient(to top, rgba(0, 200, 255, 0.2), transparent);
+    }
+    
+    /* Rooftop details */
+    .building-art .rooftop {
+      position: absolute;
+      top: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 30%;
+      height: 15px;
+      background: #0a0a12;
+      border-radius: 2px 2px 0 0;
+    }
+    
+    .building-art .rooftop::after {
+      content: '';
+      position: absolute;
+      top: 3px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 4px;
+      height: 4px;
+      background: #ff3333;
+      border-radius: 50%;
+      box-shadow: 0 0 5px #ff3333;
+      animation: beacon 1.5s ease-in-out infinite;
+    }
+    
+    @keyframes beacon {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+    
+    /* Building widths and positions */
+    .ba1 { left: 0%; width: 5%; height: 35%; }
+    .ba2 { left: 4%; width: 6%; height: 50%; }
+    .ba3 { left: 9%; width: 7%; height: 70%; }
+    .ba4 { left: 15%; width: 5%; height: 45%; }
+    .ba5 { left: 19%; width: 8%; height: 90%; }
+    .ba6 { left: 26%; width: 6%; height: 60%; }
+    .ba7 { left: 31%; width: 9%; height: 100%; }
+    .ba8 { left: 39%; width: 5%; height: 55%; }
+    .ba9 { left: 43%; width: 7%; height: 80%; }
+    .ba10 { left: 49%; width: 6%; height: 65%; }
+    .ba11 { left: 54%; width: 8%; height: 95%; }
+    .ba12 { left: 61%; width: 5%; height: 50%; }
+    .ba13 { left: 65%; width: 7%; height: 75%; }
+    .ba14 { left: 71%; width: 6%; height: 60%; }
+    .ba15 { left: 76%; width: 8%; height: 85%; }
+    .ba16 { left: 83%; width: 5%; height: 45%; }
+    .ba17 { left: 87%; width: 7%; height: 70%; }
+    .ba18 { left: 93%; width: 7%; height: 55%; }
+    
+    .beam-1 { left: 10%; animation: beamPulse 8s ease-in-out infinite; }
+    .beam-2 { left: 30%; animation: beamPulse 10s ease-in-out infinite 2s; }
+    .beam-3 { left: 55%; animation: beamPulse 12s ease-in-out infinite 4s; animation-direction: reverse; }
+    .beam-4 { left: 75%; animation: beamPulse 9s ease-in-out infinite 1s; }
+    .beam-5 { left: 90%; animation: beamPulse 11s ease-in-out infinite 3s; }
+    
+    @keyframes beamPulse {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.6; }
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
     }
   </style>
 </head>
-<body class="bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-100">
-  <div class="min-h-screen px-6 py-10 max-w-6xl mx-auto">
-    <div class="flex justify-between items-center mb-8">
-      <h1 class="text-2xl font-bold">DevOps Portfolio</h1>
-      <button onclick="toggleDarkMode()" class="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-100 px-4 py-2 rounded shadow">
-        Toggle Dark Mode
-      </button>
+<body class="min-h-screen crt">
+  <div class="scan-bar"></div>
+  <div class="cyber-grid"></div>
+  <!-- Optional: Add your own background image here -->
+  <!-- <img src="YOUR_IMAGE_URL.jpg" style="position:fixed;inset:0;width:100%;height:100%;object-fit:cover;opacity:0.6;z-index:-2;"> -->
+  
+  <div class="orange-haze"></div>
+
+  <!-- System Status Bar -->
+  <div class="fixed top-0 left-0 right-0 z-50 bg-black/80 border-b border-[rgba(5,217,232,0.3)] backdrop-blur-sm">
+    <div class="max-w-7xl mx-auto px-4 py-2 flex justify-between items-center text-xs tech">
+      <div class="flex items-center gap-4">
+        <span class="text-[var(--neon-pink)]">●</span>
+        <span class="text-[var(--neon-cyan)]">SYSTEM: ONLINE</span>
+        <span class="text-gray-600">|</span>
+        <span class="text-gray-400">UPTIME: 99.9%</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <span class="text-[var(--neon-yellow)]">⚡ <span id="clock">00:00:00</span></span>
+        <span class="text-[var(--neon-cyan)]">AMRUT_PAGIDIPALLY@DEVOPS</span>
+      </div>
     </div>
-
-    <header class="mb-20 flex flex-col md:flex-row items-center justify-between gap-10">
-      <div class="flex-1">
-        <h1 class="text-5xl font-bold text-gray-900 dark:text-white leading-tight">Hi, I'm Amrut Pagidipally</h1>
-        <p class="text-lg mt-4 text-gray-600 dark:text-gray-300">Shipping scalable infrastructure. Automating everything. Sleeping peacefully.</p>
-      </div>
-      <div class="flex-1 text-center">
-        <img src="images/devops-toolchain.jpg" alt="DevOps Illustration" class="w-full max-w-xs md:max-w-sm mx-auto rounded shadow">
-      </div>
-    </header>
-
-    <section id="about" class="mb-20">
-      <h2 class="text-sm text-gray-500 uppercase tracking-widest mb-2">About</h2>
-      <h3 class="text-3xl font-bold mb-6">Who I Am</h3>
-      <p class="leading-relaxed text-lg">I'm a DevOps engineer passionate about building scalable infrastructure, automating deployments, and reducing cloud costs. I specialize in Kubernetes, Terraform, CI/CD pipelines, and monitoring systems that help teams deliver faster with confidence.</p>
-    </section>
-
-    <section id="skills" class="mb-20">
-      <h2 class="text-sm text-gray-500 uppercase tracking-widest mb-2">Skills</h2>
-      <h3 class="text-3xl font-bold mb-6">Tools & Technologies</h3>
-      <div class="grid grid-cols-2 md:grid-cols-3 gap-4 text-lg">
-        <div>AWS, GCP, Azure</div>
-        <div>Terraform, Pulumi</div>
-        <div>Docker, Kubernetes</div>
-        <div>GitHub Actions, Jenkins, ArgoCD</div>
-        <div>Prometheus, Grafana, ELK</div>
-      </div>
-    </section>
-
-    <section id="certifications" class="mb-20">
-      <h2 class="text-sm text-gray-500 uppercase tracking-widest mb-2">Certifications</h2>
-      <h3 class="text-3xl font-bold mb-6">Credentials</h3>
-      <ul class="list-disc list-inside text-lg">
-        <li>AWS Certified Solutions Architect – Professional</li>
-        <li>AWS Certified Solutions Architect – Associate</li>
-        <li>Certified Kubernetes Administrator (CKA)</li>
-        <li>HashiCorp Certified: Terraform Associate</li>
-      </ul>
-    </section>
-
-    <section id="projects" class="mb-20">
-      <h2 class="text-sm text-gray-500 uppercase tracking-widest mb-2">Projects</h2>
-      <h3 class="text-3xl font-bold mb-6">What I've Built</h3>
-      <div class="grid md:grid-cols-2 gap-6">
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow hover:scale-105 transition">
-          <h3 class="text-xl font-semibold mb-2">AWS Cost Optimizer with AI</h3>
-          <p>Identifies and stops idle resources automatically.</p>
-          <a href="#" class="text-blue-600 dark:text-blue-400 hover:underline text-sm">View on GitHub →</a>
-        </div>
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow hover:scale-105 transition">
-          <h3 class="text-xl font-semibold mb-2">Kubernetes GitOps Pipeline</h3>
-          <p>Full setup with ArgoCD, Helm, and Kustomize.</p>
-          <a href="#" class="text-blue-600 dark:text-blue-400 hover:underline text-sm">View on GitHub →</a>
-        </div>
-        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow hover:scale-105 transition">
-          <h3 class="text-xl font-semibold mb-2">Terraform Module Registry</h3>
-          <p>A collection of reusable IaC modules.</p>
-          <a href="#" class="text-blue-600 dark:text-blue-400 hover:underline text-sm">View on GitHub →</a>
-        </div>
-        <div class="bg-gray-900 text-green-300 font-mono p-6 rounded-lg shadow">
-          <pre class="text-left"><span class="typewriter-wrapper">$ terraform apply
-$ kubectl get pods -A</span></pre>
-        </div>
-      </div>
-    </section>
-
-    <section id="contact" class="mb-20">
-      <h2 class="text-3xl font-semibold text-green-300 mb-2">Contact</h2>
-      <p class="text-gray-300">Email: <a href="mailto:amrut.pagidipally@gmail.com" class="text-green-400 hover:underline">amrut.pagidipally@gmail.com</a></p>
-      <p class="text-gray-300">GitHub: <a href="https://github.com/amrutp24" class="text-green-400 hover:underline">@amrutp24</a></p>
-      <p class="text-gray-300">LinkedIn: <a href="https://www.linkedin.com/in/amrut-pagidipally-bb4244180/" class="text-green-400 hover:underline">/amrut-pagidipally</a></p>
-    </section>
-
-    <footer class="text-center text-gray-500 dark:text-gray-400 mt-20">
-      <p>© 2025 Amrut Pagidipally | DevOps Portfolio</p>
-    </footer>
   </div>
+
+  <!-- Navigation -->
+  <nav class="fixed top-9 left-0 right-0 z-50 bg-[#010a0f]/90 border-b border-[rgba(5,217,232,0.2)] backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <div class="flex items-center gap-2">
+        <div class="status-dot"></div>
+        <span class="tech text-xl font-bold tracking-wider">
+          <span class="text-[var(--neon-pink)]">&lt;</span><span class="text-[var(--neon-cyan)]">AMRUT</span><span class="text-[var(--neon-pink)]">/&gt;</span>
+        </span>
+      </div>
+      <div class="hidden md:flex items-center gap-8 tech text-sm">
+        <a href="#about" class="nav-item text-gray-300 hover:text-[var(--neon-cyan)] transition-colors">[ ABOUT ]</a>
+        <a href="#skills" class="nav-item text-gray-300 hover:text-[var(--neon-cyan)] transition-colors">[ SKILLS ]</a>
+        <a href="#certs" class="nav-item text-gray-300 hover:text-[var(--neon-cyan)] transition-colors">[ CERTS ]</a>
+        <a href="#projects" class="nav-item text-gray-300 hover:text-[var(--neon-cyan)] transition-colors">[ PROJECTS ]</a>
+        <a href="#contact" class="nav-item text-gray-300 hover:text-[var(--neon-cyan)] transition-colors">[ CONTACT ]</a>
+      </div>
+      <button id="menu-btn" class="md:hidden text-[var(--neon-cyan)] text-2xl">☰</button>
+    </div>
+    <div id="mobile-menu" class="hidden md:hidden px-6 pb-4 bg-black/90">
+      <div class="flex flex-col gap-3 tech text-sm">
+        <a href="#about" class="text-gray-300 hover:text-[var(--neon-cyan)]">[ ABOUT ]</a>
+        <a href="#skills" class="text-gray-300 hover:text-[var(--neon-cyan)]">[ SKILLS ]</a>
+        <a href="#certs" class="text-gray-300 hover:text-[var(--neon-cyan)]">[ CERTS ]</a>
+        <a href="#projects" class="text-gray-300 hover:text-[var(--neon-cyan)]">[ PROJECTS ]</a>
+        <a href="#contact" class="text-gray-300 hover:text-[var(--neon-cyan)]">[ CONTACT ]</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="min-h-screen flex items-center justify-center pt-20 relative">
+    <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
+      <div class="reveal-up">
+        <div class="flex items-center gap-3 mb-6">
+          <span class="w-20 h-[2px] bg-[var(--neon-pink)]"></span>
+          <span class="tech text-[var(--neon-pink)] text-sm flicker">// INITIALIZED</span>
+        </div>
+        
+        <h1 class="text-5xl md:text-7xl font-black leading-none mb-6">
+          <span class="tech text-gray-400 text-3xl md:text-4xl block mb-2">DEVOPS</span>
+          <span class="glitch text-6xl md:text-8xl" data-text="ENGINEER" style="color: var(--neon-orange);">ENGINEER</span>
+        </h1>
+        
+        <div class="tech text-xl mb-8 text-gray-300">
+          <span class="rgb-split amber-glow">AUTOMATE // DEPLOY // SCALE</span>
+        </div>
+        
+        <p class="text-gray-400 mb-8 leading-relaxed max-w-lg">
+          Building bulletproof infrastructure that scales to millions. 
+          Turning complex systems into elegant deployments. 
+          <span class="text-[var(--neon-pink)]">kubectl apply</span> is my spell.
+        </p>
+        
+        <div class="flex flex-wrap gap-4">
+          <a href="#projects" class="tech px-8 py-4 bg-[var(--neon-pink)] text-black font-bold text-sm uppercase tracking-wider hover:bg-[#ff5a8a] transition-all hover:shadow-[0_0_30px_rgba(255,42,109,0.5)]">
+            ▸ VIEW_PROJECTS
+          </a>
+          <a href="#contact" class="tech px-8 py-4 border border-[var(--neon-cyan)] text-[var(--neon-cyan)] font-bold text-sm uppercase tracking-wider hover:bg-[var(--neon-cyan)]/10 hover:shadow-[0_0_30px_rgba(5,217,232,0.3)]">
+            ▸ INITIATE_CONTACT
+          </a>
+        </div>
+        
+        <div class="flex gap-8 mt-10">
+          <div class="tech">
+            <div class="text-4xl font-bold text-[var(--neon-cyan)]">10+</div>
+            <div class="text-gray-500 text-xs">REPOSITORIES</div>
+          </div>
+          <div class="tech">
+            <div class="text-4xl font-bold text-[var(--neon-pink)]">4+</div>
+            <div class="text-gray-500 text-xs">CERTIFICATIONS</div>
+          </div>
+          <div class="tech">
+            <div class="text-4xl font-bold text-[var(--neon-yellow)]">3</div>
+            <div class="text-gray-500 text-xs">CLOUD_PROVIDERS</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="reveal-up" style="transition-delay: 0.2s;">
+        <div class="terminal-window rounded-lg corner-brackets">
+          <div class="header px-4 py-3 flex items-center gap-2">
+            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+            <span class="ml-4 tech text-xs text-gray-500">amrut@mainframe ~</span>
+          </div>
+          <div class="p-5 tech text-sm">
+            <p class="mb-3"><span class="text-[var(--neon-green)]">➜</span> <span class="text-gray-500">whoami</span></p>
+            <p class="text-[var(--neon-cyan)] mb-4">amrut_pagidipally</p>
+            
+            <p class="mb-3"><span class="text-[var(--neon-green)]">➜</span> <span class="text-gray-500">cat ~/.skills</span></p>
+            <p class="text-[var(--neon-pink)]">{</p>
+            <p class="pl-4 text-[var(--neon-yellow)]">"clouds": ["AWS", "GCP", "AZURE"],</p>
+            <p class="pl-4 text-[var(--neon-yellow)]">"k8s": "CERTIFIED",</p>
+            <p class="pl-4 text-[var(--neon-yellow)]">"terraform": "EXPERT",</p>
+            <p class="pl-4 text-[var(--neon-yellow)]">"status": "AVAILABLE"</p>
+            <p class="text-[var(--neon-pink)]">}</p>
+            <p class="mb-4"></p>
+            
+            <p class="mb-3"><span class="text-[var(--neon-green)]">➜</span> <span class="text-gray-500">helm install career amrut/career --set ready=true</span></p>
+            <p class="text-gray-400">NAME: career</p>
+            <p class="text-gray-400">NAMESPACE: production</p>
+            <p class="text-gray-400">STATUS: DEPLOYED</p>
+            <p class="mt-3"><span class="text-[var(--neon-green)]">➜</span> <span class="blink text-[var(--neon-green)]"></span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+      <i data-lucide="chevrons-down" class="w-8 h-8 text-[var(--neon-cyan)]"></i>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="py-24 relative danger-stripe">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="reveal-up">
+        <div class="flex items-center gap-4 mb-4">
+          <span class="w-20 h-[2px] bg-[var(--neon-cyan)]"></span>
+          <span class="tech text-[var(--neon-cyan)]">// ABOUT_ME</span>
+        </div>
+        
+        <div class="grid lg:grid-cols-2 gap-12">
+          <div>
+            <h2 class="text-4xl md:text-5xl font-bold mb-8">
+              <span class="glitch" data-text="WHO_AM_I" style="color: var(--neon-pink);">WHO_AM_I</span>
+            </h2>
+            <div class="space-y-6 text-gray-300 leading-relaxed">
+              <p class="text-lg">
+                I'm a <span class="text-[var(--neon-cyan)]">DevOps Engineer</span> who eats infrastructure for breakfast. 
+                I build systems that survive chaos and deploy with confidence.
+              </p>
+              <p>
+                From manual SSH scripts to fully automated GitOps pipelines, 
+                I've seen evolution. Now I help organizations 
+                <span class="text-[var(--neon-yellow)]">ship faster</span>, 
+                <span class="text-[var(--neon-pink)]">sleep better</span>, and 
+                <span class="text-[var(--neon-cyan)]">scale further</span>.
+              </p>
+              <p>
+                My weapon of choice: 
+                <span class="tech text-[var(--neon-green)]">KUBERNETES + TERRAFORM + CLOUD</span>
+              </p>
+            </div>
+            
+            <div class="flex flex-wrap gap-3 mt-8">
+              <span class="cyber-tag px-4 py-2 rounded tech text-sm">KUBERNETES</span>
+              <span class="cyber-tag px-4 py-2 rounded tech text-sm">TERRAFORM</span>
+              <span class="cyber-tag px-4 py-2 rounded tech text-sm">AWS</span>
+              <span class="cyber-tag px-4 py-2 rounded tech text-sm">GCP</span>
+              <span class="cyber-tag px-4 py-2 rounded tech text-sm">DOCKER</span>
+              <span class="cyber-tag px-4 py-2 rounded tech text-sm">GITHUB_ACTIONS</span>
+            </div>
+          </div>
+          
+          <div class="cyber-panel p-8 rounded-lg corner-brackets">
+            <h3 class="tech text-xl font-bold mb-6 text-[var(--neon-cyan)]">// CAPABILITIES</h3>
+            <div class="space-y-4">
+              <div class="flex items-center gap-4">
+                <div class="w-12 h-12 flex items-center justify-center bg-[var(--neon-pink)]/10 rounded">
+                  <i data-lucide="cloud" class="w-6 h-6 text-[var(--neon-pink)]"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-[var(--neon-pink)]">MULTI-CLOUD ARCHITECTURE</h4>
+                  <p class="text-gray-400 text-sm">AWS // GCP // Azure // Hybrid</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-4">
+                <div class="w-12 h-12 flex items-center justify-center bg-[var(--neon-cyan)]/10 rounded">
+                  <i data-lucide="boxes" class="w-6 h-6 text-[var(--neon-cyan)]"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-[var(--neon-cyan)]">KUBERNETES ORCHESTRATION</h4>
+                  <p class="text-gray-400 text-sm">K8s // Helm // GitOps // Service Mesh</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-4">
+                <div class="w-12 h-12 flex items-center justify-center bg-[var(--neon-yellow)]/10 rounded">
+                  <i data-lucide="file-code" class="w-6 h-6 text-[var(--neon-yellow)]"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-[var(--neon-yellow)]">INFRASTRUCTURE AS CODE</h4>
+                  <p class="text-gray-400 text-sm">Terraform // Pulumi // Ansible</p>
+                </div>
+              </div>
+              <div class="flex items-center gap-4">
+                <div class="w-12 h-12 flex items-center justify-center bg-[var(--neon-purple)]/10 rounded">
+                  <i data-lucide="git-merge" class="w-6 h-6 text-[var(--neon-purple)]"></i>
+                </div>
+                <div>
+                  <h4 class="font-bold text-[var(--neon-purple)]">CI/CD AUTOMATION</h4>
+                  <p class="text-gray-400 text-sm">Jenkins // GitHub Actions // ArgoCD</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills -->
+  <section id="skills" class="py-24 bg-[#010a0f]/50">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="reveal-up">
+        <div class="flex items-center gap-4 mb-4">
+          <span class="w-20 h-[2px] bg-[var(--neon-cyan)]"></span>
+          <span class="tech text-[var(--neon-cyan)]">// TECH_STACK</span>
+        </div>
+        <h2 class="text-4xl md:text-5xl font-bold mb-12 glitch" data-text="SKILLS_MATRIX" style="color: var(--neon-green);">SKILLS_MATRIX</h2>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="holo-card p-6 rounded-lg">
+            <div class="flex items-center gap-3 mb-4">
+              <i data-lucide="cloud" class="w-8 h-8 text-[var(--neon-orange)]"></i>
+              <h3 class="tech text-xl font-bold">CLOUD_PLATFORMS</h3>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="cyber-tag px-3 py-1 rounded mono text-sm">AWS</span>
+              <span class="cyber-tag px-3 py-1 rounded mono text-sm">GCP</span>
+              <span class="cyber-tag px-3 py-1 rounded mono text-sm">AZURE</span>
+            </div>
+          </div>
+          
+          <div class="holo-card p-6 rounded-lg">
+            <div class="flex items-center gap-3 mb-4">
+              <i data-lucide="boxes" class="w-8 h-8 text-[var(--neon-pink)]"></i>
+              <h3 class="tech text-xl font-bold">CONTAINERS</h3>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="cyber-tag px-3 py-1 rounded mono text-sm">DOCKER</span>
+              <span class="cyber-tag px-3 py-1 rounded mono text-sm">KUBERNETES</span>
+              <span class="cyber-tag px-3 py-1 rounded mono text-sm">HELM</span>
+              <span class="cyber-tag px-3 py-1 rounded mono text-sm">KUSTOMIZE</span>
+            </div>
+          </div>
+          
+          <div class="holo-card p-6 rounded-lg">
+            <div class="flex items-center gap-3 mb-4">
+              <i data-lucide="file-code" class="w-8 h-8 text-[var(--neon-yellow)]"></i>
+              <h3 class="tech text-xl font-bold">IA_C</h3>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="cyber-tag px-3 py-1 rounded mono text-sm">TERRAFORM</span>
+              <span class="cyber-tag px-3 py-1 rounded mono text-sm">PULUMI</span>
+              <span class="cyber-tag px-3 py-1 rounded mono text-sm">CLOUDFORMATION</span>
+            </div>
+          </div>
+          
+          <div class="holo-card p-6 rounded-lg">
+            <div class="flex items-center gap-3 mb-4">
+              <i data-lucide="git-merge" class="w-8 h-8 text-[var(--neon-purple)]"></i>
+              <h3 class="tech text-xl font-bold">CI_CD</h3>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="cyber-tag px-3 py-1 rounded mono text-sm">GITHUB_ACTIONS</span>
+              <span class="cyber-tag px-3 py-1 rounded mono text-sm">JENKINS</span>
+              <span class="cyber-tag px-3 py-1 rounded mono text-sm">ARGOCD</span>
+            </div>
+          </div>
+          
+          <div class="holo-card p-6 rounded-lg">
+            <div class="flex items-center gap-3 mb-4">
+              <i data-lucide="activity" class="w-8 h-8 text-[var(--neon-green)]"></i>
+              <h3 class="tech text-xl font-bold">OBSERVABILITY</h3>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="cyber-tag px-3 py-1 rounded mono text-sm">PROMETHEUS</span>
+              <span class="cyber-tag px-3 py-1 rounded mono text-sm">GRAFANA</span>
+              <span class="cyber-tag px-3 py-1 rounded mono text-sm">ELK</span>
+            </div>
+          </div>
+          
+          <div class="holo-card p-6 rounded-lg">
+            <div class="flex items-center gap-3 mb-4">
+              <i data-lucide="server" class="w-8 h-8 text-[var(--neon-cyan)]"></i>
+              <h3 class="tech text-xl font-bold">SCRIPTING</h3>
+            </div>
+            <div class="flex flex-wrap gap-2">
+              <span class="cyber-tag px-3 py-1 rounded mono text-sm">PYTHON</span>
+              <span class="cyber-tag px-3 py-1 rounded mono text-sm">BASH</span>
+              <span class="cyber-tag px-3 py-1 rounded mono text-sm">GO</span>
+              <span class="cyber-tag px-3 py-1 rounded mono text-sm">ANSIBLE</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Certifications -->
+  <section id="certs" class="py-24">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="reveal-up">
+        <div class="flex items-center gap-4 mb-4">
+          <span class="w-20 h-[2px] bg-[var(--neon-cyan)]"></span>
+          <span class="tech text-[var(--neon-cyan)]">// CREDENTIALS</span>
+        </div>
+        <h2 class="text-4xl md:text-5xl font-bold mb-12 glitch" data-text="CERTIFICATIONS" style="color: var(--neon-pink);">CERTIFICATIONS</h2>
+        
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="cyber-panel p-6 rounded-lg flex items-center gap-6 hover:border-[var(--neon-pink)] transition-colors">
+            <div class="w-20 h-20 flex items-center justify-center bg-[#ff9900]/20 rounded-lg">
+              <i data-lucide="award" class="w-10 h-10 text-[#ff9900]"></i>
+            </div>
+            <div>
+              <h3 class="tech text-xl font-bold mb-1">AWS_SA_PROFESSIONAL</h3>
+              <p class="text-gray-400 text-sm">Solutions Architect Professional</p>
+              <p class="text-[var(--neon-cyan)] text-xs mt-2">// AWS_CERTIFIED</p>
+            </div>
+          </div>
+          
+          <div class="cyber-panel p-6 rounded-lg flex items-center gap-6 hover:border-[var(--neon-cyan)] transition-colors">
+            <div class="w-20 h-20 flex items-center justify-center bg-[#4285f4]/20 rounded-lg">
+              <i data-lucide="award" class="w-10 h-10 text-[#4285f4]"></i>
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <h3 class="tech text-xl font-bold mb-1">GCP_CLOUD_ARCHITECT</h3>
+                <span class="tech text-xs px-2 py-1 bg-[var(--neon-pink)]/20 text-[var(--neon-pink)] rounded">NEW_CERT</span>
+              </div>
+              <p class="text-gray-400 text-sm">Professional Cloud Architect</p>
+              <p class="text-[var(--neon-cyan)] text-xs mt-2">// GCP_ACE</p>
+            </div>
+          </div>
+          
+          <div class="cyber-panel p-6 rounded-lg flex items-center gap-6 hover:border-[var(--neon-purple)] transition-colors">
+            <div class="w-20 h-20 flex items-center justify-center bg-[#326ce5]/20 rounded-lg">
+              <i data-lucide="award" class="w-10 h-10 text-[#326ce5]"></i>
+            </div>
+            <div>
+              <div class="flex items-center gap-2">
+                <h3 class="tech text-xl font-bold mb-1">CKA_CERTIFIED</h3>
+                <span class="tech text-xs px-2 py-1 bg-[var(--neon-pink)]/20 text-[var(--neon-pink)] rounded">NEW_CERT</span>
+              </div>
+              <p class="text-gray-400 text-sm">Certified Kubernetes Administrator</p>
+              <p class="text-[var(--neon-purple)] text-xs mt-2">// CNCF_VERIFIED</p>
+            </div>
+          </div>
+          
+          <div class="cyber-panel p-6 rounded-lg flex items-center gap-6 hover:border-[var(--neon-yellow)] transition-colors">
+            <div class="w-20 h-20 flex items-center justify-center bg-[#7b42bc]/20 rounded-lg">
+              <i data-lucide="award" class="w-10 h-10 text-[#7b42bc]"></i>
+            </div>
+            <div>
+              <h3 class="tech text-xl font-bold mb-1">TERRAFORM_ASSOCIATE</h3>
+              <p class="text-gray-400 text-sm">HashiCorp Certified</p>
+              <p class="text-[var(--neon-yellow)] text-xs mt-2">// HASHICORP</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects -->
+  <section id="projects" class="py-24 bg-[#010a0f]/50">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="reveal-up">
+        <div class="flex items-center gap-4 mb-4">
+          <span class="w-20 h-[2px] bg-[var(--neon-cyan)]"></span>
+          <span class="tech text-[var(--neon-cyan)]">// PROJECTS</span>
+        </div>
+        <h2 class="text-4xl md:text-5xl font-bold mb-12 glitch" data-text="WHAT_I_BUILT" style="color: var(--neon-yellow);">WHAT_I_BUILT</h2>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <a href="https://github.com/amrutp24/event-driven-sre-platform" target="_blank" class="holo-card p-6 rounded-lg group">
+            <div class="flex items-center justify-between mb-4">
+              <i data-lucide="shield" class="w-10 h-10 text-[var(--neon-pink)]"></i>
+              <i data-lucide="external-link" class="w-5 h-5 text-gray-500 group-hover:text-[var(--neon-pink)] transition-colors"></i>
+            </div>
+            <h3 class="tech text-lg font-bold mb-2 group-hover:text-[var(--neon-pink)] transition-colors">SRE_PLATFORM</h3>
+            <p class="text-gray-400 text-sm mb-4">Event-driven incident management with automated remediation.</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="cyber-tag px-2 py-1 rounded text-xs">PYTHON</span>
+              <span class="cyber-tag px-2 py-1 rounded text-xs">KAFKA</span>
+              <span class="cyber-tag px-2 py-1 rounded text-xs">K8S</span>
+            </div>
+          </a>
+          
+          <a href="https://github.com/amrutp24/TerraformAwsCloudDemo" target="_blank" class="holo-card p-6 rounded-lg group">
+            <div class="flex items-center justify-between mb-4">
+              <i data-lucide="cloud" class="w-10 h-10 text-[var(--neon-cyan)]"></i>
+              <i data-lucide="external-link" class="w-5 h-5 text-gray-500 group-hover:text-[var(--neon-cyan)] transition-colors"></i>
+            </div>
+            <h3 class="tech text-lg font-bold mb-2 group-hover:text-[var(--neon-cyan)] transition-colors">TERRAFORM_AWS</h3>
+            <p class="text-gray-400 text-sm mb-4">Production-ready AWS infrastructure with best practices.</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="cyber-tag px-2 py-1 rounded text-xs">TERRAFORM</span>
+              <span class="cyber-tag px-2 py-1 rounded text-xs">AWS</span>
+              <span class="cyber-tag px-2 py-1 rounded text-xs">IAC</span>
+            </div>
+          </a>
+          
+          <a href="https://github.com/amrutp24/Modulr.AI" target="_blank" class="holo-card p-6 rounded-lg group">
+            <div class="flex items-center justify-between mb-4">
+              <i data-lucide="brain" class="w-10 h-10 text-[var(--neon-purple)]"></i>
+              <i data-lucide="external-link" class="w-5 h-5 text-gray-500 group-hover:text-[var(--neon-purple)] transition-colors"></i>
+            </div>
+            <h3 class="tech text-lg font-bold mb-2 group-hover:text-[var(--neon-purple)] transition-colors">MODULR_AI</h3>
+            <p class="text-gray-400 text-sm mb-4">AI-powered infrastructure automation framework.</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="cyber-tag px-2 py-1 rounded text-xs">PYTHON</span>
+              <span class="cyber-tag px-2 py-1 rounded text-xs">AI/ML</span>
+            </div>
+          </a>
+          
+          <a href="https://github.com/amrutp24/Rag-on-a-budget" target="_blank" class="holo-card p-6 rounded-lg group">
+            <div class="flex items-center justify-between mb-4">
+              <i data-lucide="file-text" class="w-10 h-10 text-[var(--neon-yellow)]"></i>
+              <i data-lucide="external-link" class="w-5 h-5 text-gray-500 group-hover:text-[var(--neon-yellow)] transition-colors"></i>
+            </div>
+            <h3 class="tech text-lg font-bold mb-2 group-hover:text-[var(--neon-yellow)] transition-colors">RAG_BUDGET</h3>
+            <p class="text-gray-400 text-sm mb-4">Cost-effective RAG implementation for document QA.</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="cyber-tag px-2 py-1 rounded text-xs">LLM</span>
+              <span class="cyber-tag px-2 py-1 rounded text-xs">VECTOR_DB</span>
+            </div>
+          </a>
+          
+          <a href="https://github.com/amrutp24/jenkins-test" target="_blank" class="holo-card p-6 rounded-lg group">
+            <div class="flex items-center justify-between mb-4">
+              <i data-lucide="git-merge" class="w-10 h-10 text-[var(--neon-green)]"></i>
+              <i data-lucide="external-link" class="w-5 h-5 text-gray-500 group-hover:text-[var(--neon-green)] transition-colors"></i>
+            </div>
+            <h3 class="tech text-lg font-bold mb-2 group-hover:text-[var(--neon-green)] transition-colors">JENKINS_TEMPLATES</h3>
+            <p class="text-gray-400 text-sm mb-4">Reusable CI/CD pipeline templates.</p>
+            <div class="flex flex-wrap gap-2">
+              <span class="cyber-tag px-2 py-1 rounded text-xs">JENKINS</span>
+              <span class="cyber-tag px-2 py-1 rounded text-xs">CI/CD</span>
+            </div>
+          </a>
+          
+          <div class="cyber-panel p-6 rounded-lg">
+            <div class="flex items-center gap-3 mb-4">
+              <i data-lucide="terminal" class="w-6 h-6 text-[var(--neon-green)]"></i>
+              <h3 class="tech text-lg font-bold">QUICK_EXEC</h3>
+            </div>
+            <div class="tech text-sm space-y-2 text-gray-400">
+              <p><span class="text-[var(--neon-green)]">$</span> kubectl get pods -A</p>
+              <p><span class="text-[var(--neon-green)]">$</span> terraform plan</p>
+              <p><span class="text-[var(--neon-green)]">$</span> docker compose up</p>
+              <p><span class="text-[var(--neon-green)]">$</span> helm upgrade --install</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="py-24">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="reveal-up">
+        <div class="flex items-center gap-4 mb-4">
+          <span class="w-20 h-[2px] bg-[var(--neon-cyan)]"></span>
+          <span class="tech text-[var(--neon-cyan)]">// CONTACT</span>
+        </div>
+        <h2 class="text-4xl md:text-5xl font-bold mb-12 glitch" data-text="INITIATE_LINK" style="color: var(--neon-cyan);">INITIATE_LINK</h2>
+        
+        <div class="grid lg:grid-cols-2 gap-12">
+          <div>
+            <p class="text-xl text-gray-400 mb-8">
+              Ready to build something legendary? Let's connect and make it happen.
+            </p>
+            
+            <div class="space-y-4">
+              <a href="mailto:amrut.pagidipally@gmail.com" class="cyber-panel p-5 rounded-lg flex items-center gap-5 group hover:border-[var(--neon-pink)]">
+                <div class="w-14 h-14 flex items-center justify-center bg-[var(--neon-pink)]/10 rounded">
+                  <i data-lucide="mail" class="w-6 h-6 text-[var(--neon-pink)]"></i>
+                </div>
+                <div>
+                  <p class="text-sm text-gray-400 tech">EMAIL_PROTOCOL</p>
+                  <p class="font-bold text-lg">amrut.pagidipally@gmail.com</p>
+                </div>
+              </a>
+              
+              <a href="https://github.com/amrutp24" target="_blank" class="cyber-panel p-5 rounded-lg flex items-center gap-5 group hover:border-[var(--neon-cyan)]">
+                <div class="w-14 h-14 flex items-center justify-center bg-[var(--neon-cyan)]/10 rounded">
+                  <i data-lucide="github" class="w-6 h-6 text-[var(--neon-cyan)]"></i>
+                </div>
+                <div>
+                  <p class="text-sm text-gray-400 tech">GITHUB_REPO</p>
+                  <p class="font-bold text-lg">@amrutp24</p>
+                </div>
+              </a>
+              
+              <a href="https://www.linkedin.com/in/amrut-pagidipally-bb4244180/" target="_blank" class="cyber-panel p-5 rounded-lg flex items-center gap-5 group hover:border-[var(--neon-purple)]">
+                <div class="w-14 h-14 flex items-center justify-center bg-[var(--neon-purple)]/10 rounded">
+                  <i data-lucide="linkedin" class="w-6 h-6 text-[var(--neon-purple)]"></i>
+                </div>
+                <div>
+                  <p class="text-sm text-gray-400 tech">LINKEDIN_NETWORK</p>
+                  <p class="font-bold text-lg">amrut-pagidipally</p>
+                </div>
+              </a>
+            </div>
+          </div>
+          
+          <div class="terminal-window rounded-lg corner-brackets">
+            <div class="header px-4 py-3 flex items-center gap-2">
+              <div class="w-3 h-3 rounded-full bg-red-500"></div>
+              <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+              <div class="w-3 h-3 rounded-full bg-green-500"></div>
+              <span class="ml-4 tech text-xs text-gray-500">send_message.sh</span>
+            </div>
+            <div class="p-5 tech text-sm">
+              <p class="text-gray-500">#!/bin/bash</p>
+              <p class="text-gray-500"></p>
+              <p><span class="text-[var(--neon-pink)]">function</span> <span class="text-[var(--neon-cyan)]">send_contact</span>() {</p>
+              <p class="pl-4">recipient=<span class="text-[var(--neon-yellow)]">"amrut"</span></p>
+              <p class="pl-4">priority=<span class="text-[var(--neon-yellow)]">"HIGH"</span></p>
+              <p class="pl-4">response_time=<span class="text-[var(--neon-yellow)]">"< 24h"</span></p>
+              <p class="pl-4">echo <span class="text-[var(--neon-green)]">"Connection initiated..."</span></p>
+              <p>}</p>
+              <p class="text-gray-500"></p>
+              <p><span class="text-[var(--neon-cyan)]">send_contact</span></p>
+              <p class="text-[var(--neon-green)] mt-4">// Awaiting input...</p>
+              <p class="mt-2"><span class="blink text-[var(--neon-green)]"></span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="border-t border-[rgba(5,217,232,0.2)] py-8">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+      <div class="tech text-sm text-gray-500">
+        <span class="text-[var(--neon-pink)]">©</span> 2025 <span class="text-[var(--neon-cyan)]">AMRUT_PAGIDIPALLY</span>
+      </div>
+      <div class="flex gap-4">
+        <a href="https://github.com/amrutp24" target="_blank" class="text-gray-500 hover:text-[var(--neon-pink)] transition-colors">
+          <i data-lucide="github" class="w-5 h-5"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/amrut-pagidipally-bb4244180/" target="_blank" class="text-gray-500 hover:text-[var(--neon-cyan)] transition-colors">
+          <i data-lucide="linkedin" class="w-5 h-5"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
 
   <script>
     lucide.createIcons();
-    function toggleDarkMode() {
-      const html = document.documentElement;
-      html.classList.toggle('dark');
-      localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
-    }
-  </script>
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      lucide.createIcons();
+    
+    // Clock
+    setInterval(() => {
+      const now = new Date();
+      document.getElementById('clock').textContent = now.toLocaleTimeString('en-US', { hour12: false });
+    }, 1000);
+    
+    // Mobile menu
+    document.getElementById('menu-btn').addEventListener('click', () => {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
     });
+    
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth' });
+          document.getElementById('mobile-menu').classList.add('hidden');
+        }
+      });
+    });
+    
+    // Reveal on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, { threshold: 0.1 });
+    
+    document.querySelectorAll('.reveal-up').forEach(el => observer.observe(el));
   </script>
-  <div data-lucide="alert-circle"></div>
-
 </body>
 </html>
