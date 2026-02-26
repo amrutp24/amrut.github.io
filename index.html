@@ -786,8 +786,25 @@
           </div>
         </div>
         
-        <div class="mt-6 text-center">
-          <p class="tech text-xs text-gray-500">Commands: kubectl, terraform, docker, helm, git, ansible, jenkins, aws, gcloud, az</p>
+        <div class="mt-6 grid md:grid-cols-2 gap-4 text-left">
+          <div class="bg-black/30 rounded p-4">
+            <h4 class="tech text-[var(--neon-cyan)] text-xs mb-2">// AVAILABLE_COMMANDS</h4>
+            <div class="text-xs text-gray-400 space-y-1 mono">
+              kubectl get pods, kubectl apply -f<br>
+              terraform init, terraform plan<br>
+              docker build -t, docker run -d<br>
+              helm install, helm upgrade<br>
+              git push, git commit -m
+            </div>
+          </div>
+          <div class="bg-black/30 rounded p-4">
+            <h4 class="tech text-[var(--neon-pink)] text-xs mb-2">// HOW_TO_PLAY</h4>
+            <div class="text-xs text-gray-400 space-y-1 mono">
+              Type the FULL command from memory<br>
+              First & last letter shown as hint<br>
+              Earn points before timeout!
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -1294,7 +1311,7 @@
       level: 1,
       lives: 3,
       currentCommand: '',
-      timeLeft: 5,
+      timeLeft: 8,
       isPlaying: false,
       timer: null
     };
@@ -1318,7 +1335,7 @@
     }
     
     function getTimeForLevel() {
-      return Math.max(2, 5 - (gameState.level * 0.3));
+      return Math.max(4, 8 - (gameState.level * 0.5));
     }
     
     function updateDisplay() {
@@ -1330,11 +1347,12 @@
     
     function newCommand() {
       gameState.currentCommand = getRandomCommand();
-      const words = gameState.currentCommand.split(' ');
-      const displayWord = words[Math.floor(Math.random() * words.length)];
-      currentCommandEl.innerHTML = gameState.currentCommand
-        .replace(displayWord, `<span class="text-[var(--neon-pink)]">${displayWord}</span>`);
-      commandDisplayEl.textContent = '> ' + '_'.repeat(20);
+      const hint = gameState.currentCommand.split(' ').map(word => {
+        if (word.length <= 2) return word;
+        return word[0] + '_'.repeat(word.length - 2) + word[word.length - 1];
+      }).join(' ');
+      currentCommandEl.innerHTML = `<span class="text-[var(--neon-cyan)]">> ${hint}</span>`;
+      commandDisplayEl.innerHTML = `<span class="text-[var(--neon-pink)]">Type: ${'_'.repeat(gameState.currentCommand.length)}</span> <span class="text-[var(--neon-yellow)]">(${gameState.currentCommand.length} chars)</span>`;
       gameState.timeLeft = getTimeForLevel();
       updateDisplay();
     }
