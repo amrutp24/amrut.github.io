@@ -758,7 +758,7 @@
             <div id="dino-game" class="h-48 bg-[#0d0d12] rounded border border-[var(--neon-cyan)]/20 relative overflow-hidden">
               <div id="dino-ground" class="absolute bottom-0 left-0 right-0 h-2 bg-[var(--neon-cyan)]/30"></div>
               <div id="dino-player" class="absolute bottom-2 left-8 text-4xl transition-transform duration-100">📟</div>
-              <div id="dino-obstacle" class="absolute bottom-2 text-3xl transition-all duration-100" style="left: 400px;">🐛</div>
+              <div id="dino-obstacle" class="absolute bottom-2 right-[-50px] text-3xl transition-all duration-100">🐛</div>
               <div id="dino-game-over" class="absolute inset-0 bg-black/80 flex items-center justify-center hidden">
                 <div class="text-center">
                   <div class="tech text-3xl text-[var(--neon-pink)] mb-4">GAME_OVER</div>
@@ -1265,50 +1265,55 @@
     let dinoState = {
       isPlaying: false,
       isJumping: false,
-      jumpHeight: 0,
+      jumpY: 0,
       score: 0,
       highScore: parseInt(localStorage.getItem('dinoHigh') || '0'),
-      obstacleLeft: 400,
+      obstacleX: -50,
       gameSpeed: 6,
       animFrame: null
     };
     
     const obstacles = ['🐛', '🦟', '🐜', '🪲', '💥', '🔥'];
-    const gameWidth = 400;
-    const playerX = 40;
+    const GAME_WIDTH = 400;
+    const PLAYER_X = 30;
+    const PLAYER_WIDTH = 40;
+    const OBSTACLE_WIDTH = 35;
+    const GROUND_Y = 8;
+    const JUMP_HEIGHT = 65;
     
     dinoHigh.textContent = dinoState.highScore;
     
     function jump() {
       if (dinoState.isJumping || !dinoState.isPlaying) return;
       dinoState.isJumping = true;
-      let jumpUp = true;
-      let jumpCount = 0;
       
-      const jumpInterval = setInterval(() => {
-        if (jumpUp) {
-          dinoState.jumpHeight += 8;
-          if (dinoState.jumpHeight >= 70) jumpUp = false;
-        } else {
-          dinoState.jumpHeight -= 8;
-          if (dinoState.jumpHeight <= 0) {
-            dinoState.jumpHeight = 0;
-            dinoState.isJumping = false;
-            clearInterval(jumpInterval);
-          }
+      let velocity = 15;
+      const gravity = 1.2;
+      
+      const jumpTimer = setInterval(() => {
+        dinoState.jumpY += velocity;
+        velocity -= gravity;
+        
+        if (dinoState.jumpY <= 0) {
+          dinoState.jumpY = 0;
+          dinoState.isJumping = false;
+          clearInterval(jumpTimer);
         }
-        dinoPlayer.style.bottom = (8 + dinoState.jumpHeight) + 'px';
+        
+        dinoPlayer.style.bottom = (GROUND_Y + dinoState.jumpY) + 'px';
       }, 20);
     }
     
     function checkCollision() {
-      const playerBottom = 8 + dinoState.jumpHeight;
-      const playerLeft = playerX + 10;
-      const playerRight = playerX + 40;
-      const obsLeft = dinoState.obstacleLeft;
-      const obsRight = dinoState.obstacleLeft + 30;
+      const obsRight = dinoState.obstacleX + OBSTACLE_WIDTH;
+      const obsLeft = dinoState.obstacleX;
+      const playerRight = PLAYER_X + PLAYER_WIDTH - 10;
+      const playerLeft = PLAYER_X + 10;
       
-      if (obsLeft < playerRight && obsLeft + 25 > playerLeft && playerBottom < 40) {
+      const horizontalOverlap = playerRight > obsLeft + 8 && playerLeft < obsRight - 8;
+      const playerLow = dinoState.jumpY < 30;
+      
+      if (horizontalOverlap && playerLow) {
         return true;
       }
       return false;
@@ -1317,10 +1322,10 @@
     function gameLoop() {
       if (!dinoState.isPlaying) return;
       
-      dinoState.obstacleLeft -= dinoState.gameSpeed;
+      dinoState.obstacleX -= dinoState.gameSpeed;
       
-      if (dinoState.obstacleLeft < -40) {
-        dinoState.obstacleLeft = gameWidth;
+      if (dinoState.obstacleX < -40) {
+        dinoState.obstacleX = GAME_WIDTH;
         dinoState.score += 10;
         dinoScore.textContent = dinoState.score;
         dinoObstacle.textContent = obstacles[Math.floor(Math.random() * obstacles.length)];
@@ -1330,7 +1335,7 @@
         }
       }
       
-      dinoObstacle.style.left = dinoState.obstacleLeft + 'px';
+      dinoObstacle.style.right = (GAME_WIDTH - dinoState.obstacleX - 40) + 'px';
       
       if (checkCollision()) {
         gameOver();
@@ -1343,14 +1348,13 @@
     function startGame() {
       dinoState.isPlaying = true;
       dinoState.score = 0;
-      dinoState.obstacleLeft = gameWidth;
-      dinoState.jumpHeight = 0;
+      dinoState.obstacleX = -50;
+      dinoState.jumpY = 0;
       dinoState.isJumping = false;
       dinoState.gameSpeed = 6;
       dinoScore.textContent = '0';
       dinoObstacle.textContent = '🐛';
-      dinoObstacle.style.left = gameWidth + 'px';
-      dinoPlayer.style.bottom = '8px';
+      dinoPlayer.style.bottom = GROUND_Y + 'px';
       dinoStart.classList.add('hidden');
       dinoGameOver.classList.add('hidden');
       gameLoop();
