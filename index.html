@@ -741,70 +741,44 @@
       <div class="reveal-up">
         <div class="flex items-center gap-4 mb-4">
           <span class="w-20 h-[2px] bg-[var(--neon-pink)]"></span>
-          <span class="tech text-[var(--neon-pink)]">// TERMINAL_TYPER</span>
+          <span class="tech text-[var(--neon-pink)]">// TERMINAL_RUNNER</span>
         </div>
-        <h2 class="text-4xl md:text-5xl font-bold mb-4 glitch" data-text="HACK_THE_SYSTEM" style="color: var(--neon-pink);">HACK_THE_SYSTEM</h2>
-        <p class="text-gray-400 mb-8 tech">Type the commands before they timeout. Prove your DevOps skills!</p>
+        <h2 class="text-4xl md:text-5xl font-bold mb-4 glitch" data-text="ESCAPE_THE_BUGS" style="color: var(--neon-pink);">ESCAPE_THE_BUGS</h2>
+        <p class="text-gray-400 mb-8 tech">Press SPACE or TAP to jump over the bugs!</p>
         
-        <div class="cyber-panel p-6 rounded-lg corner-brackets">
-          <div class="flex justify-between items-center mb-6">
-            <div class="flex gap-6 tech text-sm">
-              <div>SCORE: <span id="score" class="text-[var(--neon-green)] text-xl font-bold">0</span></div>
-              <div>LEVEL: <span id="level" class="text-[var(--neon-cyan)] text-xl font-bold">1</span></div>
-              <div>LIVES: <span id="lives" class="text-[var(--neon-pink)]">❤❤❤</span></div>
+        <div class="cyber-panel p-0 rounded-lg corner-brackets overflow-hidden">
+          <div class="bg-[#0a0a0f] p-4">
+            <div class="flex justify-between items-center mb-2">
+              <div class="flex gap-6 tech text-sm">
+                <div>SCORE: <span id="dino-score" class="text-[var(--neon-green)] text-xl font-bold">0</span></div>
+                <div>HIGH: <span id="dino-high" class="text-[var(--neon-yellow)]">0</span></div>
+              </div>
             </div>
-            <div class="tech text-xs text-gray-500">TIME: <span id="timer" class="text-[var(--neon-yellow)] text-lg">5.0</span>s</div>
-          </div>
-          
-          <div class="terminal-window rounded mb-6">
-            <div class="header px-4 py-2 flex items-center gap-2">
-              <div class="w-3 h-3 rounded-full bg-red-500"></div>
-              <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
-              <div class="w-3 h-3 rounded-full bg-green-500"></div>
-              <span class="ml-4 tech text-xs text-gray-500">terminal_hacker.exe</span>
+            
+            <div id="dino-game" class="h-48 bg-[#0d0d12] rounded border border-[var(--neon-cyan)]/20 relative overflow-hidden">
+              <div id="dino-ground" class="absolute bottom-0 left-0 right-0 h-2 bg-[var(--neon-cyan)]/30"></div>
+              <div id="dino-player" class="absolute bottom-2 left-8 text-4xl transition-transform duration-100">📟</div>
+              <div id="dino-obstacle" class="absolute bottom-2 right-[-50px] text-3xl transition-all duration-100">🐛</div>
+              <div id="dino-game-over" class="absolute inset-0 bg-black/80 flex items-center justify-center hidden">
+                <div class="text-center">
+                  <div class="tech text-3xl text-[var(--neon-pink)] mb-4">GAME_OVER</div>
+                  <div class="tech text-xl text-[var(--neon-cyan)] mb-4">Score: <span id="dino-final">0</span></div>
+                  <button id="dino-restart" class="tech px-6 py-2 bg-[var(--neon-pink)] text-black font-bold text-sm uppercase">
+                    ▸ RETRY
+                  </button>
+                </div>
+              </div>
+              <div id="dino-start" class="absolute inset-0 flex items-center justify-center">
+                <div class="text-center">
+                  <div class="tech text-2xl text-[var(--neon-cyan)] mb-4">PRESS SPACE TO START</div>
+                </div>
+              </div>
             </div>
-            <div class="p-6 text-center">
-              <div id="current-command" class="tech text-2xl md:text-3xl mb-4 text-[var(--neon-cyan)] min-h-[50px]"></div>
-              <div id="command-display" class="tech text-xl text-gray-400 opacity-50 mb-4 min-h-[30px]"></div>
-              <input type="text" id="game-input" class="w-full bg-black/50 border border-[var(--neon-cyan)]/30 rounded px-4 py-3 tech text-xl text-[var(--neon-green)] focus:outline-none focus:border-[var(--neon-cyan)]" placeholder="TYPE_HERE..." autocomplete="off" disabled>
-            </div>
-          </div>
-          
-          <div id="game-controls" class="flex justify-center gap-4">
-            <button id="start-btn" class="tech px-8 py-3 bg-[var(--neon-green)] text-black font-bold text-sm uppercase tracking-wider hover:bg-[#00ff66] transition-all hover:shadow-[0_0_30px_rgba(0,255,65,0.5)]">
-              ▸ START_GAME
-            </button>
-          </div>
-          
-          <div id="game-over" class="hidden text-center py-8">
-            <h3 class="tech text-3xl text-[var(--neon-pink)] mb-4">SYSTEM_HACKED_FAILED</h3>
-            <p class="text-gray-400 mb-4">Final Score: <span id="final-score" class="text-[var(--neon-cyan)] text-2xl font-bold">0</span></p>
-            <p id="rank-msg" class="text-[var(--neon-yellow)] mb-6 tech"></p>
-            <button id="restart-btn" class="tech px-8 py-3 bg-[var(--neon-pink)] text-black font-bold text-sm uppercase tracking-wider hover:bg-[#ff5a8a] transition-all">
-              ▸ TRY_AGAIN
-            </button>
           </div>
         </div>
         
-        <div class="mt-6 grid md:grid-cols-2 gap-4 text-left">
-          <div class="bg-black/30 rounded p-4">
-            <h4 class="tech text-[var(--neon-cyan)] text-xs mb-2">// AVAILABLE_COMMANDS</h4>
-            <div class="text-xs text-gray-400 space-y-1 mono">
-              kubectl get pods, kubectl apply -f<br>
-              terraform init, terraform plan<br>
-              docker build -t, docker run -d<br>
-              helm install, helm upgrade<br>
-              git push, git commit -m
-            </div>
-          </div>
-          <div class="bg-black/30 rounded p-4">
-            <h4 class="tech text-[var(--neon-pink)] text-xs mb-2">// HOW_TO_PLAY</h4>
-            <div class="text-xs text-gray-400 space-y-1 mono">
-              Type the FULL command from memory<br>
-              First & last letter shown as hint<br>
-              Earn points before timeout!
-            </div>
-          </div>
+        <div class="mt-6 text-center">
+          <p class="tech text-xs text-gray-500">Jump over bugs before they crash your system!</p>
         </div>
       </div>
     </div>
@@ -1277,157 +1251,134 @@
     
     document.querySelectorAll('.reveal-up').forEach(el => observer.observe(el));
     
-    // Terminal Typer Game
-    const commands = [
-      'kubectl get pods',
-      'kubectl apply -f',
-      'terraform init',
-      'terraform plan',
-      'docker build -t',
-      'docker run -d',
-      'helm install',
-      'helm upgrade --install',
-      'git push origin main',
-      'git commit -m',
-      'ansible-playbook',
-      'jenkins build',
-      'aws s3 cp',
-      'gcloud deploy',
-      'az vm create',
-      'kubectl exec -it',
-      'docker-compose up',
-      'terraform destroy',
-      'kubectl delete pod',
-      'helm list',
-      'git merge feature',
-      'docker ps -a',
-      'kubectl logs -f',
-      'terraform state mv',
-      'helm repo update'
-    ];
+    // Terminal Runner Game (Dino style)
+    const dinoGame = document.getElementById('dino-game');
+    const dinoPlayer = document.getElementById('dino-player');
+    const dinoObstacle = document.getElementById('dino-obstacle');
+    const dinoScore = document.getElementById('dino-score');
+    const dinoHigh = document.getElementById('dino-high');
+    const dinoGameOver = document.getElementById('dino-game-over');
+    const dinoStart = document.getElementById('dino-start');
+    const dinoFinal = document.getElementById('dino-final');
+    const dinoRestart = document.getElementById('dino-restart');
     
-    let gameState = {
-      score: 0,
-      level: 1,
-      lives: 3,
-      currentCommand: '',
-      timeLeft: 8,
+    let dinoState = {
       isPlaying: false,
-      timer: null
+      isJumping: false,
+      score: 0,
+      highScore: parseInt(localStorage.getItem('dinoHigh') || '0'),
+      obstaclePos: -50,
+      gameSpeed: 5,
+      animFrame: null
     };
     
-    const scoreEl = document.getElementById('score');
-    const levelEl = document.getElementById('level');
-    const livesEl = document.getElementById('lives');
-    const timerEl = document.getElementById('timer');
-    const currentCommandEl = document.getElementById('current-command');
-    const commandDisplayEl = document.getElementById('command-display');
-    const gameInput = document.getElementById('game-input');
-    const startBtn = document.getElementById('start-btn');
-    const restartBtn = document.getElementById('restart-btn');
-    const gameControls = document.getElementById('game-controls');
-    const gameOverEl = document.getElementById('game-over');
-    const finalScoreEl = document.getElementById('final-score');
-    const rankMsgEl = document.getElementById('rank-msg');
+    const obstacles = ['🐛', '🦟', '🐜', '🪲', '💥', '🔥'];
     
-    function getRandomCommand() {
-      return commands[Math.floor(Math.random() * commands.length)];
+    dinoHigh.textContent = dinoState.highScore;
+    
+    function jump() {
+      if (dinoState.isJumping || !dinoState.isPlaying) return;
+      dinoState.isJumping = true;
+      dinoPlayer.style.transform = 'translateY(-60px) rotate(-10deg)';
+      
+      setTimeout(() => {
+        dinoPlayer.style.transform = 'translateY(0) rotate(0deg)';
+        dinoState.isJumping = false;
+      }, 400);
     }
     
-    function getTimeForLevel() {
-      return Math.max(4, 8 - (gameState.level * 0.5));
+    function checkCollision() {
+      const playerRect = dinoPlayer.getBoundingClientRect();
+      const obsRect = dinoObstacle.getBoundingClientRect();
+      
+      const playerLeft = playerRect.left + 20;
+      const playerRight = playerRect.right - 10;
+      const obsLeft = obsRect.left + 10;
+      const obsRight = obsRect.right - 10;
+      
+      if (playerRight > obsLeft && playerLeft < obsRight && !dinoState.isJumping) {
+        return true;
+      }
+      return false;
     }
     
-    function updateDisplay() {
-      scoreEl.textContent = gameState.score;
-      levelEl.textContent = gameState.level;
-      livesEl.textContent = '❤'.repeat(gameState.lives);
-      timerEl.textContent = gameState.timeLeft.toFixed(1);
-    }
-    
-    function newCommand() {
-      gameState.currentCommand = getRandomCommand();
-      const hint = gameState.currentCommand.split(' ').map(word => {
-        if (word.length <= 2) return word;
-        return word[0] + '_'.repeat(word.length - 2) + word[word.length - 1];
-      }).join(' ');
-      currentCommandEl.innerHTML = `<span class="text-[var(--neon-cyan)]">> ${hint}</span>`;
-      commandDisplayEl.innerHTML = `<span class="text-[var(--neon-pink)]">Type: ${'_'.repeat(gameState.currentCommand.length)}</span> <span class="text-[var(--neon-yellow)]">(${gameState.currentCommand.length} chars)</span>`;
-      gameState.timeLeft = getTimeForLevel();
-      updateDisplay();
+    function gameLoop() {
+      if (!dinoState.isPlaying) return;
+      
+      dinoState.obstaclePos -= dinoState.gameSpeed;
+      
+      if (dinoState.obstaclePos < -50) {
+        dinoState.obstaclePos = 350;
+        dinoState.score += 10;
+        dinoScore.textContent = dinoState.score;
+        dinoObstacle.textContent = obstacles[Math.floor(Math.random() * obstacles.length)];
+        
+        if (dinoState.score % 50 === 0) {
+          dinoState.gameSpeed += 0.5;
+        }
+      }
+      
+      dinoObstacle.style.right = dinoState.obstaclePos + 'px';
+      
+      if (checkCollision()) {
+        gameOver();
+        return;
+      }
+      
+      dinoState.animFrame = requestAnimationFrame(gameLoop);
     }
     
     function startGame() {
-      gameState = {
-        score: 0,
-        level: 1,
-        lives: 3,
-        currentCommand: '',
-        timeLeft: 5,
-        isPlaying: true,
-        timer: null
-      };
-      gameControls.classList.add('hidden');
-      gameOverEl.classList.add('hidden');
-      gameInput.disabled = false;
-      gameInput.value = '';
-      gameInput.focus();
-      newCommand();
-      
-      gameState.timer = setInterval(() => {
-        gameState.timeLeft -= 0.1;
-        updateDisplay();
-        
-        if (gameState.timeLeft <= 0) {
-          gameState.lives--;
-          updateDisplay();
-          
-          if (gameState.lives <= 0) {
-            endGame();
-          } else {
-            gameInput.value = '';
-            newCommand();
-          }
-        }
-      }, 100);
+      dinoState.isPlaying = true;
+      dinoState.score = 0;
+      dinoState.obstaclePos = -50;
+      dinoState.gameSpeed = 5;
+      dinoScore.textContent = '0';
+      dinoObstacle.textContent = '🐛';
+      dinoObstacle.style.right = '-50px';
+      dinoStart.classList.add('hidden');
+      dinoGameOver.classList.add('hidden');
+      gameLoop();
     }
     
-    function endGame() {
-      clearInterval(gameState.timer);
-      gameState.isPlaying = false;
-      gameInput.disabled = true;
-      gameControls.classList.remove('hidden');
-      gameOverEl.classList.remove('hidden');
-      finalScoreEl.textContent = gameState.score;
+    function gameOver() {
+      dinoState.isPlaying = false;
+      cancelAnimationFrame(dinoState.animFrame);
+      dinoGameOver.classList.remove('hidden');
+      dinoFinal.textContent = dinoState.score;
       
-      let rank = 'SCRIPT_KIDDIE';
-      if (gameState.score >= 200) rank = 'DEVOPS_MASTER';
-      else if (gameState.score >= 150) rank = 'KUBERNETES_NINJA';
-      else if (gameState.score >= 100) rank = 'TERRAFORM_WARRIOR';
-      else if (gameState.score >= 50) rank = 'DOCKER_CAPTAIN';
-      else if (gameState.score >= 25) rank = 'JUNIOR_ADMIN';
-      
-      rankMsgEl.textContent = `// RANK: ${rank}`;
+      if (dinoState.score > dinoState.highScore) {
+        dinoState.highScore = dinoState.score;
+        localStorage.setItem('dinoHigh', dinoState.highScore);
+        dinoHigh.textContent = dinoState.highScore;
+      }
     }
     
-    gameInput.addEventListener('input', () => {
-      if (!gameState.isPlaying) return;
-      
-      const input = gameInput.value.trim();
-      if (input === gameState.currentCommand) {
-        gameState.score += 10 + (gameState.level * 2);
-        
-        if (gameState.score > 0 && gameState.score % 50 === 0) {
-          gameState.level++;
+    document.addEventListener('keydown', (e) => {
+      if (e.code === 'Space') {
+        e.preventDefault();
+        if (dinoState.isPlaying) {
+          jump();
+        } else if (!dinoGameOver.classList.contains('hidden') || !dinoStart.classList.contains('hidden')) {
+          startGame();
         }
-        
-        gameInput.value = '';
-        newCommand();
       }
     });
     
-    startBtn.addEventListener('click', startGame);
-    restartBtn.addEventListener('click', startGame);
+    dinoGame.addEventListener('touchstart', (e) => {
+      e.preventDefault();
+      if (dinoState.isPlaying) {
+        jump();
+      } else if (!dinoGameOver.classList.contains('hidden') || !dinoStart.classList.contains('hidden')) {
+        startGame();
+      }
+    });
+    
+    dinoGame.addEventListener('click', () => {
+      if (dinoState.isPlaying) jump();
+    });
+    
+    dinoRestart.addEventListener('click', startGame);
   </script>
 </body>
 </html>
