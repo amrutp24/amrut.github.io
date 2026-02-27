@@ -758,7 +758,7 @@
             <div id="dino-game" class="h-48 bg-[#0d0d12] rounded border border-[var(--neon-cyan)]/20 relative overflow-hidden">
               <div id="dino-ground" class="absolute bottom-0 left-0 right-0 h-2 bg-[var(--neon-cyan)]/30"></div>
               <div id="dino-player" class="absolute bottom-2 left-8 text-4xl transition-transform duration-100">📟</div>
-              <div id="dino-obstacle" class="absolute bottom-2 right-[-50px] text-3xl transition-all duration-100">🐛</div>
+              <div id="dino-obstacle" class="absolute bottom-2 text-3xl transition-all duration-100" style="left: 400px;">🐛</div>
               <div id="dino-game-over" class="absolute inset-0 bg-black/80 flex items-center justify-center hidden">
                 <div class="text-center">
                   <div class="tech text-3xl text-[var(--neon-pink)] mb-4">GAME_OVER</div>
@@ -1265,38 +1265,50 @@
     let dinoState = {
       isPlaying: false,
       isJumping: false,
+      jumpHeight: 0,
       score: 0,
       highScore: parseInt(localStorage.getItem('dinoHigh') || '0'),
-      obstaclePos: -50,
-      gameSpeed: 5,
+      obstacleLeft: 400,
+      gameSpeed: 6,
       animFrame: null
     };
     
     const obstacles = ['🐛', '🦟', '🐜', '🪲', '💥', '🔥'];
+    const gameWidth = 400;
+    const playerX = 40;
     
     dinoHigh.textContent = dinoState.highScore;
     
     function jump() {
       if (dinoState.isJumping || !dinoState.isPlaying) return;
       dinoState.isJumping = true;
-      dinoPlayer.style.transform = 'translateY(-60px) rotate(-10deg)';
+      let jumpUp = true;
+      let jumpCount = 0;
       
-      setTimeout(() => {
-        dinoPlayer.style.transform = 'translateY(0) rotate(0deg)';
-        dinoState.isJumping = false;
-      }, 400);
+      const jumpInterval = setInterval(() => {
+        if (jumpUp) {
+          dinoState.jumpHeight += 8;
+          if (dinoState.jumpHeight >= 70) jumpUp = false;
+        } else {
+          dinoState.jumpHeight -= 8;
+          if (dinoState.jumpHeight <= 0) {
+            dinoState.jumpHeight = 0;
+            dinoState.isJumping = false;
+            clearInterval(jumpInterval);
+          }
+        }
+        dinoPlayer.style.bottom = (8 + dinoState.jumpHeight) + 'px';
+      }, 20);
     }
     
     function checkCollision() {
-      const playerRect = dinoPlayer.getBoundingClientRect();
-      const obsRect = dinoObstacle.getBoundingClientRect();
+      const playerBottom = 8 + dinoState.jumpHeight;
+      const playerLeft = playerX + 10;
+      const playerRight = playerX + 40;
+      const obsLeft = dinoState.obstacleLeft;
+      const obsRight = dinoState.obstacleLeft + 30;
       
-      const playerLeft = playerRect.left + 20;
-      const playerRight = playerRect.right - 10;
-      const obsLeft = obsRect.left + 10;
-      const obsRight = obsRect.right - 10;
-      
-      if (playerRight > obsLeft && playerLeft < obsRight && !dinoState.isJumping) {
+      if (obsLeft < playerRight && obsLeft + 25 > playerLeft && playerBottom < 40) {
         return true;
       }
       return false;
@@ -1305,10 +1317,10 @@
     function gameLoop() {
       if (!dinoState.isPlaying) return;
       
-      dinoState.obstaclePos -= dinoState.gameSpeed;
+      dinoState.obstacleLeft -= dinoState.gameSpeed;
       
-      if (dinoState.obstaclePos < -50) {
-        dinoState.obstaclePos = 350;
+      if (dinoState.obstacleLeft < -40) {
+        dinoState.obstacleLeft = gameWidth;
         dinoState.score += 10;
         dinoScore.textContent = dinoState.score;
         dinoObstacle.textContent = obstacles[Math.floor(Math.random() * obstacles.length)];
@@ -1318,7 +1330,7 @@
         }
       }
       
-      dinoObstacle.style.right = dinoState.obstaclePos + 'px';
+      dinoObstacle.style.left = dinoState.obstacleLeft + 'px';
       
       if (checkCollision()) {
         gameOver();
@@ -1331,11 +1343,14 @@
     function startGame() {
       dinoState.isPlaying = true;
       dinoState.score = 0;
-      dinoState.obstaclePos = -50;
-      dinoState.gameSpeed = 5;
+      dinoState.obstacleLeft = gameWidth;
+      dinoState.jumpHeight = 0;
+      dinoState.isJumping = false;
+      dinoState.gameSpeed = 6;
       dinoScore.textContent = '0';
       dinoObstacle.textContent = '🐛';
-      dinoObstacle.style.right = '-50px';
+      dinoObstacle.style.left = gameWidth + 'px';
+      dinoPlayer.style.bottom = '8px';
       dinoStart.classList.add('hidden');
       dinoGameOver.classList.add('hidden');
       gameLoop();
