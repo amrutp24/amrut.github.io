@@ -18,6 +18,9 @@
 <meta name="twitter:title" content="Amrut Pagidipally">
 <meta name="twitter:description" content="I test what cloud vendors claim, then write down what I found. Senior CloudOps &amp; DevOps engineer, AWS Community Builder.">
 <meta name="twitter:image" content="https://amrutp24.github.io/amrut.github.io/images/og.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
 <meta name="description" content="Senior CloudOps &amp; DevOps engineer and AWS Community Builder. I test what cloud vendors claim and write down what I find. Terraform providers, SRE tooling, Lambda, Bedrock, GCP.">
 <style>
 :root{
@@ -66,19 +69,43 @@ code{
 
 .page{max-width:42rem;margin:0 auto;padding:clamp(48px,10vh,104px) 0 72px}
 
-/* ---------- header ---------- */
-header h1{font-size:1.9rem;font-weight:400;letter-spacing:-.01em;line-height:1.15}
-header .role{
+/* ---------- hero ---------- */
+.display{font-family:Newsreader,Charter,"Iowan Old Style",Georgia,serif;font-optical-sizing:auto}
+.hero .who{
   font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
-  font-size:.86rem;color:var(--muted);margin-top:8px;letter-spacing:.01em;
+  font-size:.82rem;color:var(--muted);letter-spacing:.01em;margin-bottom:22px;
 }
-header .role b{font-weight:500;color:var(--fg)}
-header .role .dot{margin:0 .5em;color:var(--faint)}
+.hero .who b{font-weight:500;color:var(--fg)}
+.hero .who .dot{margin:0 .5em;color:var(--faint)}
+.hero h1{
+  font-size:clamp(40px,6.6vw,72px);font-weight:400;line-height:1.02;
+  letter-spacing:-.018em;max-width:15ch;text-wrap:balance;
+}
+.hero h1 em{font-style:italic;color:var(--mark)}
 
+/* diagram */
+.diagram{margin-top:44px}
+.diagram .scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
+.diagram svg{display:block;width:100%;min-width:560px;height:auto;font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+.diagram .box{fill:var(--bg);stroke:var(--fg);stroke-width:1}
+.diagram .lbl{fill:var(--fg);font-size:11px}
+.diagram .sub{fill:var(--muted);font-size:9.5px}
+.diagram .ln{stroke:var(--fg);stroke-width:1;fill:none}
+.diagram .ar{fill:var(--fg)}
+.diagram .wait{fill:none;stroke:var(--mark);stroke-width:1;stroke-dasharray:3 3}
+.diagram .waitl{fill:var(--mark);font-size:10px;font-weight:600}
+.diagram .cb{stroke:var(--mark);stroke-width:1;fill:none}
+.diagram .cbar{fill:var(--mark)}
+.diagram figcaption{
+  font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  font-size:.8rem;color:var(--faint);margin-top:12px;max-width:38rem;line-height:1.5;
+}
+.diagram figcaption a{color:var(--muted)}
+
+/* ---------- header ---------- */
 .intro{margin-top:36px;max-width:36rem}
 .intro p{margin-bottom:1.1em}
 .intro p:last-child{margin-bottom:0}
-.intro .lede{font-size:1.2rem;line-height:1.45}
 
 /* ---------- sections ---------- */
 section{margin-top:64px}
@@ -130,6 +157,7 @@ h2::after{content:"";flex:1;height:1px;background:var(--rule)}
   background:var(--code);padding:16px 18px;overflow-x:auto;
   border-left:2px solid var(--rule);
 }
+.specimen .lead{margin:0 0 10px;color:var(--muted)}
 .specimen .ok{color:var(--muted)}
 .specimen .no{color:var(--mark);font-weight:600}
 .specimen figcaption{
@@ -180,8 +208,6 @@ footer button:hover{text-decoration-color:var(--mark)}
 
 @media (max-width:600px){
   body{font-size:16px}
-  header h1{font-size:1.6rem}
-  .intro .lede{font-size:1.1rem}
   .rows,.pairs li{grid-template-columns:1fr;row-gap:4px}
   .rows{row-gap:14px}
   .rows .k{margin-bottom:-10px}
@@ -193,13 +219,12 @@ footer button:hover{text-decoration-color:var(--mark)}
 <body>
 <div class="page">
 
-  <header>
-    <h1>Amrut Pagidipally</h1>
-    <div class="role"><b>Senior CloudOps &amp; DevOps engineer</b><span class="dot">·</span>AWS Community Builder<span class="dot">·</span>Texas</div>
+  <header class="hero">
+    <div class="who"><b>Amrut Pagidipally</b><span class="dot">·</span>Senior CloudOps &amp; DevOps engineer<span class="dot">·</span>AWS Community Builder<span class="dot">·</span>Texas</div>
+    <h1 class="display">I test what cloud vendors claim, <em>then write down what I found.</em></h1>
   </header>
 
   <div class="intro">
-    <p class="lede">I test what cloud vendors claim, then write down what I found.</p>
     <p>AWS, GCP and Terraform for the day job. Outside of it I poke at new releases,
        break things in my own account, and publish the results — including the parts
        that didn't work. One of those write-ups got AWS to fix its own documentation
@@ -207,6 +232,64 @@ footer button:hover{text-decoration-color:var(--mark)}
        AgentCore, and Terraform providers for services that didn't have one.</p>
     <p>The rest of my time goes to movies and one series too many.</p>
   </div>
+
+  <figure class="diagram">
+    <div class="scroll">
+    <svg viewBox="0 0 640 236" role="img" aria-label="Architecture of the durable-agent-pipeline module">
+      <defs>
+        <marker id="a" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L8,4 L0,8 z" class="ar"/></marker>
+        <marker id="b" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L8,4 L0,8 z" class="cbar"/></marker>
+      </defs>
+
+      <rect x="0.5" y="40.5" width="64" height="34" class="box"/>
+      <text x="32" y="61" text-anchor="middle" class="lbl">Client</text>
+      <line x1="65" y1="57" x2="92" y2="57" class="ln" marker-end="url(#a)"/>
+
+      <rect x="94.5" y="40.5" width="92" height="34" class="box"/>
+      <text x="140" y="56" text-anchor="middle" class="lbl">API Gateway</text>
+      <text x="140" y="68" text-anchor="middle" class="sub">POST /posts</text>
+      <line x1="187" y1="57" x2="214" y2="57" class="ln" marker-end="url(#a)"/>
+
+      <rect x="216.5" y="40.5" width="86" height="34" class="box"/>
+      <text x="259" y="56" text-anchor="middle" class="lbl">API Lambda</text>
+      <text x="259" y="68" text-anchor="middle" class="sub">starts a run</text>
+      <line x1="303" y1="57" x2="330" y2="57" class="ln" marker-end="url(#a)"/>
+
+      <rect x="332.5" y="40.5" width="136" height="34" class="box"/>
+      <text x="400" y="56" text-anchor="middle" class="lbl">Durable orchestrator</text>
+      <text x="400" y="68" text-anchor="middle" class="sub">Lambda · checkpoint &amp; replay</text>
+      <line x1="469" y1="57" x2="496" y2="57" class="ln" marker-end="url(#a)"/>
+
+      <rect x="498.5" y="40.5" width="141" height="34" class="box"/>
+      <text x="569" y="56" text-anchor="middle" class="lbl">Bedrock agents</text>
+      <text x="569" y="68" text-anchor="middle" class="sub">draft → review → revise</text>
+
+      <line x1="372" y1="75" x2="372" y2="100" class="ln"/>
+      <rect x="332.5" y="102.5" width="112" height="30" rx="15" class="wait"/>
+      <text x="388" y="116" text-anchor="middle" class="waitl">suspended · $0</text>
+      <text x="388" y="127" text-anchor="middle" class="sub">up to a year, no compute</text>
+
+      <rect x="332.5" y="182.5" width="112" height="34" class="box"/>
+      <text x="388" y="198" text-anchor="middle" class="lbl">Human reviewer</text>
+      <text x="388" y="210" text-anchor="middle" class="sub">POST /posts/{id}/approve</text>
+      <line x1="388" y1="182" x2="388" y2="140" class="cb" marker-end="url(#b)"/>
+      <text x="380" y="164" text-anchor="end" class="sub">callback resumes it</text>
+
+      <line x1="452" y1="75" x2="452" y2="199" class="ln"/>
+      <line x1="452" y1="165" x2="496" y2="165" class="ln" marker-end="url(#a)"/>
+      <line x1="452" y1="199" x2="496" y2="199" class="ln" marker-end="url(#a)"/>
+      <rect x="498.5" y="150.5" width="141" height="30" class="box"/>
+      <text x="569" y="164" text-anchor="middle" class="lbl">DynamoDB</text>
+      <text x="569" y="175" text-anchor="middle" class="sub">run status, callback ids</text>
+      <rect x="498.5" y="188.5" width="141" height="30" class="box"/>
+      <text x="569" y="202" text-anchor="middle" class="lbl">S3</text>
+      <text x="569" y="213" text-anchor="middle" class="sub">published output</text>
+    </svg>
+    </div>
+    <figcaption>What the <a href="https://registry.terraform.io/modules/amrutp24/durable-agent-pipeline/aws/latest">durable-agent-pipeline</a>
+      module builds: an AI content pipeline that pauses for a human at zero cost and picks up where it left off.
+      Writing it up is what surfaced the undocumented IAM pattern AWS later documented.</figcaption>
+  </figure>
 
   <section id="selected">
     <h2>Selected</h2>
@@ -271,6 +354,8 @@ footer button:hover{text-decoration-color:var(--mark)}
     </div>
 
     <figure class="specimen">
+      <figcaption class="lead">What a run of scp-preflight looks like. A service control policy is an AWS-wide guardrail;
+        you list what your roles must and must not be able to do, and the tool checks the proposed policy against each one:</figcaption>
 <pre><span class="ok">PASS</span>  deploys work in an approved region [lambda:CreateFunction on *]
 <span class="ok">PASS</span>  deploys work in an approved region [s3:CreateBucket on *]
 <span class="ok">PASS</span>  the second approved region also works [lambda:CreateFunction on *]
@@ -280,9 +365,9 @@ footer button:hover{text-decoration-color:var(--mark)}
         actual:   explicitDeny
         decided by: the SCP hierarchy (the API does not say which policy)
 4/5 checks passed</pre>
-      <figcaption>scp-preflight against a region-lock SCP with the global-services carve-out
-        removed — the mistake that breaks role creation everywhere. The pull request fails
-        before the policy is attached, instead of on-call finding out.</figcaption>
+      <figcaption>The last check fails: this policy would block creating IAM roles everywhere, because the
+        carve-out for global services was left out. That failure shows up in the pull request, before the
+        policy is attached — instead of at 3am.</figcaption>
     </figure>
   </section>
 
