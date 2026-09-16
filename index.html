@@ -4,6 +4,20 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Amrut Pagidipally</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%231c1b19'/%3E%3Ctext x='32' y='47' text-anchor='middle' font-family='Charter,Georgia,serif' font-size='44' fill='%23fffdf9'%3EA%3C/text%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="images/icon-180.png">
+<link rel="canonical" href="https://amrutp24.github.io/amrut.github.io/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Amrut Pagidipally">
+<meta property="og:description" content="I test what cloud vendors claim, then write down what I found. Senior CloudOps &amp; DevOps engineer, AWS Community Builder.">
+<meta property="og:url" content="https://amrutp24.github.io/amrut.github.io/">
+<meta property="og:image" content="https://amrutp24.github.io/amrut.github.io/images/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Amrut Pagidipally">
+<meta name="twitter:description" content="I test what cloud vendors claim, then write down what I found. Senior CloudOps &amp; DevOps engineer, AWS Community Builder.">
+<meta name="twitter:image" content="https://amrutp24.github.io/amrut.github.io/images/og.png">
 <meta name="description" content="Senior CloudOps &amp; DevOps engineer and AWS Community Builder. I test what cloud vendors claim and write down what I find. Terraform providers, SRE tooling, Lambda, Bedrock, GCP.">
 <style>
 :root{
@@ -107,6 +121,21 @@ h2::after{content:"";flex:1;height:1px;background:var(--rule)}
 }
 .rows .v{color:var(--muted);font-size:.98rem;line-height:1.5}
 .rows .v code{margin-left:2px}
+
+/* specimen: one real artifact */
+.specimen{margin-top:30px}
+.specimen pre{
+  font-family:ui-monospace,"Cascadia Mono","SF Mono",Menlo,Consolas,monospace;
+  font-size:.78rem;line-height:1.6;color:var(--fg);
+  background:var(--code);padding:16px 18px;overflow-x:auto;
+  border-left:2px solid var(--rule);
+}
+.specimen .ok{color:var(--muted)}
+.specimen .no{color:var(--mark);font-weight:600}
+.specimen figcaption{
+  font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  font-size:.8rem;color:var(--faint);margin-top:10px;max-width:36rem;line-height:1.5;
+}
 
 /* archive: dense */
 .archive{list-style:none}
@@ -240,6 +269,21 @@ footer button:hover{text-decoration-color:var(--mark)}
       <div class="k"><a href="https://github.com/amrutp24/scp-preflight">scp-preflight</a></div>
       <div class="v">Test an AWS service control policy against your workloads before you attach it. Declare what roles must and must not be able to do; it runs the policy simulator and fails the PR if reality disagrees.</div>
     </div>
+
+    <figure class="specimen">
+<pre><span class="ok">PASS</span>  deploys work in an approved region [lambda:CreateFunction on *]
+<span class="ok">PASS</span>  deploys work in an approved region [s3:CreateBucket on *]
+<span class="ok">PASS</span>  the second approved region also works [lambda:CreateFunction on *]
+<span class="ok">PASS</span>  an unapproved region is blocked [lambda:CreateFunction on *]
+<span class="no">FAIL</span>  global services stay reachable from any region [iam:CreateRole on arn:aws:iam::123456789012:role/app-worker]
+        expected: allowed
+        actual:   explicitDeny
+        decided by: the SCP hierarchy (the API does not say which policy)
+4/5 checks passed</pre>
+      <figcaption>scp-preflight against a region-lock SCP with the global-services carve-out
+        removed — the mistake that breaks role creation everywhere. The pull request fails
+        before the policy is attached, instead of on-call finding out.</figcaption>
+    </figure>
   </section>
 
   <section id="writing">
