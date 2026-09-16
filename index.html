@@ -85,6 +85,9 @@ code{
 
 /* diagram */
 .diagram{margin-top:44px}
+.feature .diagram{margin:22px 0 4px}
+.diagram figcaption code{font-size:.9em}
+.diagram figcaption em{font-style:italic}
 .diagram .scroll{overflow-x:auto;-webkit-overflow-scrolling:touch}
 .diagram svg{display:block;width:100%;min-width:560px;height:auto;font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
 .diagram .box{fill:var(--bg);stroke:var(--fg);stroke-width:1}
@@ -233,6 +236,16 @@ footer button:hover{text-decoration-color:var(--mark)}
     <p>The rest of my time goes to movies and one series too many.</p>
   </div>
 
+
+  <section id="selected">
+    <h2>Selected</h2>
+    <ul class="feature">
+      <li>
+        <h3><a href="https://amruteng.medium.com/i-blogged-about-an-aws-docs-gap-eight-days-later-aws-closed-it-f335d81d8a7e">I blogged about an AWS docs gap. Eight days later, AWS closed it.</a></h3>
+        <p>Building a human-in-the-loop agent pipeline on Lambda durable functions turned up
+           an undocumented IAM pattern for callbacks and SDK examples that no longer worked.
+           I wrote it up. The examples were removed and the developer guide gained a
+           callback-permissions page. Timeline included.</p>
   <figure class="diagram">
     <div class="scroll">
     <svg viewBox="0 0 640 236" role="img" aria-label="Architecture of the durable-agent-pipeline module">
@@ -286,20 +299,10 @@ footer button:hover{text-decoration-color:var(--mark)}
       <text x="569" y="213" text-anchor="middle" class="sub">published output</text>
     </svg>
     </div>
-    <figcaption>What the <a href="https://registry.terraform.io/modules/amrutp24/durable-agent-pipeline/aws/latest">durable-agent-pipeline</a>
-      module builds: an AI content pipeline that pauses for a human at zero cost and picks up where it left off.
-      Writing it up is what surfaced the undocumented IAM pattern AWS later documented.</figcaption>
+    <figcaption>The pipeline in question, as the <a href="https://registry.terraform.io/modules/amrutp24/durable-agent-pipeline/aws/latest">durable-agent-pipeline</a>
+      module builds it. The undocumented permission was the red arrow: resuming a suspended run needs
+      <code>SendDurableExecutionCallback</code> on the <em>versioned</em> function ARN, which the docs never said.</figcaption>
   </figure>
-
-  <section id="selected">
-    <h2>Selected</h2>
-    <ul class="feature">
-      <li>
-        <h3><a href="https://amruteng.medium.com/i-blogged-about-an-aws-docs-gap-eight-days-later-aws-closed-it-f335d81d8a7e">I blogged about an AWS docs gap. Eight days later, AWS closed it.</a></h3>
-        <p>Building a human-in-the-loop agent pipeline on Lambda durable functions turned up
-           an undocumented IAM pattern for callbacks and SDK examples that no longer worked.
-           I wrote it up. The examples were removed and the developer guide gained a
-           callback-permissions page. Timeline included.</p>
         <div class="meta">August 2026<span class="sep">·</span>Medium<span class="sep">·</span><a href="https://builder.aws.com/content/3HKzWwiLnQ9YiXZDTUqpk0XQhFD/a-write-up-about-lambda-durable-functions-got-the-docs-fixed">also on AWS Builder Center</a></div>
       </li>
       <li>
