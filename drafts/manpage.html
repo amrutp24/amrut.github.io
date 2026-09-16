@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>amrut(1) — Amrut Pagidipally</title>
+<meta name="description" content="amrut(1): DevOps / platform engineer. Kubernetes, Terraform, AWS, GCP, Azure. Keeps infrastructure boring.">
+<style>
+:root{
+  --bg:#fbfaf6;
+  --fg:#1f1f1c;
+  --fg-dim:#6e6c64;
+  --bold:#000;
+  --bar-bg:#1f1f1c;
+  --bar-fg:#fbfaf6;
+  --sel:#1f1f1c;
+  --sel-fg:#fbfaf6;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#161614;
+    --fg:#c9c7bd;
+    --fg-dim:#7b7970;
+    --bold:#f2f0e8;
+    --bar-bg:#c9c7bd;
+    --bar-fg:#161614;
+    --sel:#c9c7bd;
+    --sel-fg:#161614;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#161614;--fg:#c9c7bd;--fg-dim:#7b7970;--bold:#f2f0e8;
+  --bar-bg:#c9c7bd;--bar-fg:#161614;--sel:#c9c7bd;--sel-fg:#161614;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--bg);
+  color:var(--fg);
+  font-family:"Cascadia Mono","SF Mono",Menlo,Consolas,"DejaVu Sans Mono","Liberation Mono",monospace;
+  font-size:14px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  padding:0 0 3.4em;                       /* room for the pager bar */
+}
+::selection{background:var(--sel);color:var(--sel-fg)}
+a{color:inherit;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px}
+a:hover,a:focus-visible{background:var(--sel);color:var(--sel-fg);text-decoration:none;outline:0}
+b{font-weight:700;color:var(--bold)}
+i{font-style:normal;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:2px}
+
+/* the 80-column page */
+.man{
+  width:min(80ch,100% - 2rem);
+  margin:0 auto;
+  padding-top:1.4em;
+}
+.hd{
+  display:flex;justify-content:space-between;gap:1ch;
+  color:var(--bold);font-weight:700;margin-bottom:1.6em;
+}
+.hd span:nth-child(2){text-align:center;flex:1}
+.ft{
+  display:flex;justify-content:space-between;gap:1ch;
+  margin-top:2.4em;color:var(--fg);
+}
+.hd span,.ft span{white-space:nowrap}
+
+section{margin-bottom:1.6em}
+h2{
+  font-size:inherit;font-weight:700;color:var(--bold);
+  text-transform:uppercase;letter-spacing:0;
+}
+.b{padding-left:7ch}                     /* body indent, as man(1) does it */
+.b p{margin-bottom:1em}
+.b p:last-child{margin-bottom:0}
+.b .sub{color:var(--bold);font-weight:700;margin:1.2em 0 .3em}
+.b .sub:first-child{margin-top:0}
+
+/* option / file lists with hanging indent */
+dl{display:grid;grid-template-columns:22ch 1fr;column-gap:1ch;row-gap:.35em}
+dl.wide{grid-template-columns:1fr;row-gap:0}
+dl.wide dd{padding-left:7ch;margin-bottom:.9em}
+dl.wide dd:last-child{margin-bottom:0}
+dt{color:var(--bold);font-weight:700;overflow-wrap:anywhere}
+dt i{font-weight:400;color:var(--fg)}
+dd{overflow-wrap:anywhere}
+dd.ex{padding-left:7ch;margin:.25em 0 .9em}
+.dim{color:var(--fg-dim)}
+
+/* less(1) status line */
+.bar{
+  position:fixed;left:0;right:0;bottom:0;
+  background:var(--bar-bg);color:var(--bar-fg);
+  font:inherit;line-height:1.5;padding:.15em 1ch;
+  display:flex;justify-content:space-between;gap:1ch;
+  white-space:nowrap;overflow:hidden;
+}
+.bar button{
+  font:inherit;color:inherit;background:none;border:0;cursor:pointer;
+  text-decoration:underline;text-underline-offset:2px;padding:0;
+}
+.bar button:hover{text-decoration:none}
+.bar .keys{opacity:.7}
+
+@media (max-width:640px){
+  body{font-size:13px}
+  .b{padding-left:3ch}
+  dl{grid-template-columns:1fr;row-gap:0}
+  dl dd{padding-left:3ch;margin-bottom:.6em}
+  dl.wide dd,dd.ex{padding-left:3ch}
+  .hd span:nth-child(2),.bar .keys{display:none}
+  .ft span:nth-child(2){display:none}
+}
+</style>
+</head>
+<body>
+
+<article class="man" id="man">
+
+  <div class="hd"><span>AMRUT(1)</span><span>General Commands Manual</span><span>AMRUT(1)</span></div>
+
+  <section id="name">
+    <h2>Name</h2>
+    <div class="b">
+      <p><b>amrut</b> - DevOps / platform engineer; keeps infrastructure boring</p>
+    </div>
+  </section>
+
+  <section id="synopsis">
+    <h2>Synopsis</h2>
+    <div class="b">
+      <p><b>amrut</b> [<b>--cloud</b> <i>aws</i>|<i>gcp</i>|<i>azure</i>] [<b>--iac</b> <i>terraform</i>|<i>pulumi</i>] [<b>--k8s</b>] [<i>OPTION</i>]...<br>
+         <b>amrut</b> <b>--contact</b></p>
+    </div>
+  </section>
+
+  <section id="description">
+    <h2>Description</h2>
+    <div class="b">
+      <p><b>amrut</b> builds and operates the layer underneath the product: clusters,
+         pipelines, cloud accounts and the on-call rota. Given a system that only
+         works when the steps are run in the right order by the one person who knows
+         them, it converts the steps into code that can be reviewed, tested and
+         rolled back.</p>
+      <p>Started, like most, with a folder of shell scripts and an SSH key. Most of
+         the work since has been closing that gap: declarative infrastructure instead
+         of a runbook, a pipeline instead of a checklist, alerts that mean something
+         instead of a dashboard nobody opens.</p>
+      <p>Defaults are conservative. Novelty is opt-in. A good deploy is one that is
+         uneventful on a Friday afternoon.</p>
+    </div>
+  </section>
+
+  <section id="options">
+    <h2>Options</h2>
+    <div class="b">
+
+      <div class="sub">Cloud</div>
+      <dl>
+        <dt>-a, --aws</dt>
+        <dd>Primary. Landing zones, account structure, networking and identity.
+            Solutions Architect &ndash; Professional.</dd>
+        <dt>-g, --gcp</dt>
+        <dd>Professional Cloud Architect. Projects, VPC design, GKE.</dd>
+        <dt>-z, --azure</dt>
+        <dd>Mostly the hybrid and identity cases nobody planned for.</dd>
+      </dl>
+
+      <div class="sub">Orchestration</div>
+      <dl>
+        <dt>-k, --kubernetes</dt>
+        <dd>Certified Kubernetes Administrator. Cluster design and day-two
+            operations: upgrades, autoscaling, resource limits that reflect reality.</dd>
+        <dt>--helm, --kustomize</dt>
+        <dd>Packaging. Prefers fewer templates over cleverer ones.</dd>
+        <dt>--gitops</dt>
+        <dd>ArgoCD as the only way into a cluster. No <i>kubectl apply</i> from laptops.</dd>
+      </dl>
+
+      <div class="sub">Infrastructure as code</div>
+      <dl>
+        <dt>-t, --terraform</dt>
+        <dd>HashiCorp Certified Associate. Modules other teams can actually reuse;
+            state kept somewhere sane; plan output short enough that people read it
+            before approving.</dd>
+        <dt>--pulumi, --cloudformation</dt>
+        <dd>When the team already speaks them.</dd>
+        <dt>--ansible</dt>
+        <dd>For the machines that still exist.</dd>
+      </dl>
+
+      <div class="sub">Delivery and observability</div>
+      <dl>
+        <dt>--ci <i>github-actions</i>|<i>jenkins</i></dt>
+        <dd>Pipelines that fail loudly and early. Reusable templates so the same
+            Jenkinsfile is not copy-pasted a sixth time.</dd>
+        <dt>--observe <i>prometheus</i>|<i>grafana</i>|<i>elk</i></dt>
+        <dd>The metrics, logs and traces needed to answer "what changed?" without
+            guessing.</dd>
+      </dl>
+
+      <div class="sub">Languages</div>
+      <dl>
+        <dt>--lang <i>python</i>|<i>bash</i>|<i>go</i></dt>
+        <dd>Python for tooling, Bash for glue, Go when it has to be a single binary.</dd>
+      </dl>
+
+    </div>
+  </section>
+
+  <section id="examples">
+    <h2>Examples</h2>
+    <div class="b">
+      <dl class="wide">
+        <dt>Stand up a production-shaped AWS environment from nothing:</dt>
+        <dd><b>amrut --aws --terraform --module</b>=<i>landing-zone</i></dd>
+        <dt>Take a forty-minute deploy down to four:</dt>
+        <dd><b>amrut --ci</b> <i>github-actions</i> <b>--gitops --cache-layers</b></dd>
+        <dt>Delete a class of incident instead of fixing it again:</dt>
+        <dd><b>amrut --observe</b> <i>prometheus</i> <b>--postmortem --fix-root-cause</b></dd>
+        <dt>Make the on-call handover a five-minute conversation:</dt>
+        <dd><b>amrut --runbook</b> <i>none</i> <b>--automate-remediation</b></dd>
+      </dl>
+    </div>
+  </section>
+
+  <section id="files">
+    <h2>Files</h2>
+    <div class="b">
+      <dl class="wide">
+        <dt><a href="https://github.com/amrutp24/event-driven-sre-platform" target="_blank" rel="noopener">~/src/event-driven-sre-platform</a></dt>
+        <dd>Incident management driven off an event stream, with automated
+            remediation for the failure modes that repeat. Python, Kafka, Kubernetes.</dd>
+
+        <dt><a href="https://github.com/amrutp24/TerraformAwsCloudDemo" target="_blank" rel="noopener">~/src/TerraformAwsCloudDemo</a></dt>
+        <dd>A production-shaped AWS environment written the way one would want to
+            inherit it: modular, documented, no surprises in state.</dd>
+
+        <dt><a href="https://github.com/amrutp24/Modulr.AI" target="_blank" rel="noopener">~/src/Modulr.AI</a></dt>
+        <dd>An automation framework that puts a language model in front of
+            infrastructure tasks, with the guardrails that implies.</dd>
+
+        <dt><a href="https://github.com/amrutp24/Rag-on-a-budget" target="_blank" rel="noopener">~/src/Rag-on-a-budget</a></dt>
+        <dd>Document question-answering built to run cheaply. An exercise in how far
+            you get before the bill starts mattering.</dd>
+
+        <dt><a href="https://github.com/amrutp24/jenkins-test" target="_blank" rel="noopener">~/src/jenkins-test</a></dt>
+        <dd>Reusable Jenkins pipeline templates.</dd>
+
+        <dt><a href="https://github.com/amrutp24" target="_blank" rel="noopener">~/src/*</a></dt>
+        <dd>The rest of the public shelf, in varying states of finish.</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section id="conforming">
+    <h2>Conforming to</h2>
+    <div class="b">
+      <dl>
+        <dt>AWS</dt><dd>Certified Solutions Architect &ndash; Professional</dd>
+        <dt>Google Cloud</dt><dd>Professional Cloud Architect</dd>
+        <dt>CNCF</dt><dd>Certified Kubernetes Administrator (CKA)</dd>
+        <dt>HashiCorp</dt><dd>Certified: Terraform Associate</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section id="exit">
+    <h2>Exit status</h2>
+    <div class="b">
+      <dl>
+        <dt>0</dt><dd>Deploy was uneventful.</dd>
+        <dt>1</dt><dd>Rolled back. One command, under a minute.</dd>
+        <dt>130</dt><dd>Interrupted by a page at 03:00. Postmortem to follow.</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section id="environment">
+    <h2>Environment</h2>
+    <div class="b">
+      <dl>
+        <dt>KUBECONFIG</dt><dd>Usually pointed at something that matters. Handled accordingly.</dd>
+        <dt>EDITOR</dt><dd>Not a religious matter.</dd>
+        <dt>STATUS</dt><dd>Open to conversations about a specific problem: a migration
+            that stalled, a cluster that misbehaves, a pipeline everyone is afraid of.</dd>
+      </dl>
+    </div>
+  </section>
+
+  <section id="bugs">
+    <h2>Bugs</h2>
+    <div class="b">
+      <p>Will occasionally over-engineer when left unsupervised. Holds the opinion
+         that every manual step is a future outage with a delay on it, and will say
+         so in review.</p>
+      <p>Report bugs to <a href="mailto:amrut.pagidipally@gmail.com">amrut.pagidipally@gmail.com</a>.
+         Include steps to reproduce.</p>
+    </div>
+  </section>
+
+  <section id="see-also">
+    <h2>See also</h2>
+    <div class="b">
+      <dl>
+        <dt><b>github</b>(1)</dt><dd><a href="https://github.com/amrutp24" target="_blank" rel="noopener">github.com/amrutp24</a></dd>
+        <dt><b>linkedin</b>(1)</dt><dd><a href="https://www.linkedin.com/in/amrut-pagidipally-bb4244180/" target="_blank" rel="noopener">linkedin.com/in/amrut-pagidipally</a></dd>
+        <dt><b>mail</b>(1)</dt><dd><a href="mailto:amrut.pagidipally@gmail.com">amrut.pagidipally@gmail.com</a></dd>
+      </dl>
+    </div>
+  </section>
+
+  <section id="author">
+    <h2>Author</h2>
+    <div class="b">
+      <p>Amrut Pagidipally. This page is a single HTML file with no dependencies,
+         which is also roughly the author's position on infrastructure.</p>
+    </div>
+  </section>
+
+  <div class="ft"><span>Linux</span><span id="date">2026-09-16</span><span>AMRUT(1)</span></div>
+
+</article>
+
+<div class="bar" role="status" aria-live="polite">
+  <span id="pos">Manual page amrut(1) line 1</span>
+  <span class="keys">j/k scroll &nbsp; g/G top/end &nbsp; <button id="theme" type="button">invert</button></span>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---- less(1) status line: line N/M, (END) when scrolled out ---- */
+  var man=document.getElementById("man"),pos=document.getElementById("pos");
+  var lh=parseFloat(getComputedStyle(document.body).lineHeight)||22;
+  function update(){
+    var total=Math.round(man.scrollHeight/lh);
+    var top=Math.round(window.scrollY/lh)+1;
+    var atEnd=window.innerHeight+window.scrollY>=document.body.scrollHeight-2;
+    pos.textContent="Manual page amrut(1) line "+top+"/"+total+(atEnd?" (END)":"");
+  }
+  addEventListener("scroll",update,{passive:true});
+  addEventListener("resize",function(){
+    lh=parseFloat(getComputedStyle(document.body).lineHeight)||22; update();
+  });
+  update();
+
+  /* ---- pager keys ---- */
+  addEventListener("keydown",function(e){
+    if(e.ctrlKey||e.metaKey||e.altKey) return;
+    if(e.target && (e.target.tagName==="INPUT"||e.target.tagName==="TEXTAREA")) return;
+    var page=window.innerHeight-lh*2;
+    switch(e.key){
+      case "j": case "e": scrollBy(0,lh); break;
+      case "k": case "y": scrollBy(0,-lh); break;
+      case "d": scrollBy(0,page/2); break;
+      case "u": scrollBy(0,-page/2); break;
+      case "f": case " ": scrollBy(0,page); break;
+      case "b": scrollBy(0,-page); break;
+      case "g": scrollTo(0,0); break;
+      case "G": scrollTo(0,document.body.scrollHeight); break;
+      default: return;
+    }
+    e.preventDefault();
+  });
+
+  /* ---- invert ---- */
+  var root=document.documentElement;
+  try{var t=localStorage.getItem("man-theme"); if(t) root.setAttribute("data-theme",t);}catch(x){}
+  document.getElementById("theme").addEventListener("click",function(){
+    var cur=root.getAttribute("data-theme");
+    var dark=cur?cur==="dark":matchMedia("(prefers-color-scheme: dark)").matches;
+    var next=dark?"light":"dark";
+    root.setAttribute("data-theme",next);
+    try{localStorage.setItem("man-theme",next);}catch(x){}
+  });
+
+  /* ---- footer date: today, the way man(1) prints it ---- */
+  var d=new Date(),p=function(n){return (n<10?"0":"")+n;};
+  document.getElementById("date").textContent=d.getFullYear()+"-"+p(d.getMonth()+1)+"-"+p(d.getDate());
+})();
+</script>
+</body>
+</html>
